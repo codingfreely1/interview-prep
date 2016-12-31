@@ -26,7 +26,7 @@ public class SearchAlgorithms {
             return -1;
         }
         //size >= 1
-        int midInx = start + (int) Math.floor(((end-start)-1)/2);
+        int midInx = start + (((end-start)-1)/2);
         if(arr.get(midInx).compareTo(c) < 0){
             return binarySearch(arr,c, midInx+1, end);
         } else if(arr.get(midInx).compareTo(c) > 0){
@@ -35,5 +35,25 @@ public class SearchAlgorithms {
             System.out.println("found it in inx : " + midInx);
             return midInx;
         }
+    }
+
+    public static int binarySearch(int[] arr, int val) {
+        int mid, cur;
+        int start = 0;
+        int end = arr.length;
+
+        while((end-start) >= 1) {
+            mid = ((end - start) / 2) + start;
+            cur = arr[mid];
+            if(cur == val) {
+                return mid;
+            } else if (cur > val) {
+                end = mid;
+            } else { //cur < val
+                start = mid + 1;
+            }
+        }
+
+        return -1;//not found.
     }
 }

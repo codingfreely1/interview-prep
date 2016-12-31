@@ -42,6 +42,16 @@ public class SearchAlgorithmsTest {
         Assert.assertEquals(SearchAlgorithms.binarySearch(arr, 5, 0, arr.size()), 2);
         Assert.assertEquals(SearchAlgorithms.binarySearch(arr, 6, 0, arr.size()), 3);
         Assert.assertEquals(SearchAlgorithms.binarySearch(arr, 7, 0, arr.size()), 4);
+    }
 
+    @Test
+    public void testBinarySearch3(){
+        int[] arr = {0,1,2,3,4};
+        Assert.assertEquals(-1, SearchAlgorithms.binarySearch(arr, 5));
+        Assert.assertEquals(2, SearchAlgorithms.binarySearch(arr, 2));
+        Assert.assertEquals(4, SearchAlgorithms.binarySearch(arr, 4));
+
+        int[] arr2 = {4,10,12,55};
+        Assert.assertEquals(2, SearchAlgorithms.binarySearch(arr2, 12));
     }
 }
