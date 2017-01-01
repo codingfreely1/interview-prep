@@ -1,6 +1,7 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -103,4 +104,28 @@ public class SortingAlgorithmsTest {
         SortingAlgorithms.mergeSort(arr);
         IntStream.range(0,arr.length).forEach(i -> {Assert.assertEquals(arr[i], 8 + i);});
     }
+
+    @Test
+    public void testGetDigitAtPosition(){
+        int num = 1234;
+        Assert.assertEquals(4, SortingAlgorithms.getDigitAtPosition(num, 0));
+        Assert.assertEquals(3, SortingAlgorithms.getDigitAtPosition(num, 1));
+        Assert.assertEquals(2, SortingAlgorithms.getDigitAtPosition(num, 2));
+        Assert.assertEquals(1, SortingAlgorithms.getDigitAtPosition(num, 3));
+    }
+
+    @Test
+    public void testRadixSort(){
+        List<Integer> array = new ArrayList<>(Arrays.asList(312,52,10));
+        SortingAlgorithms.radixSort(array, 3);
+        Assert.assertEquals(Arrays.asList(10, 52, 312), array);
+    }
+
+    @Test
+    public void testRadixSort1(){
+        List<Integer> array = new ArrayList<>(Arrays.asList(1000, 312,52,10, 1));
+        SortingAlgorithms.radixSort(array, 4);
+        Assert.assertEquals(Arrays.asList(1,10,52,312,1000), array);
+    }
+
 }

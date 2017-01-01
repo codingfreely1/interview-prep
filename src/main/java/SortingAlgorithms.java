@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by yael on 31/12/16.
@@ -103,5 +102,37 @@ public class SortingAlgorithms {
             }
             i++;
         }
+    }
+
+    public static void radixSort(List<Integer> list, int maxDigits) {
+        Map<Integer, List<Integer>> hashMap = new HashMap<>();
+        for (int i = 0; i < maxDigits; i++) {
+            insert(list, i, hashMap);
+            collect(list, hashMap);
+        }
+    }
+
+    private static void insert(List<Integer> list, int position, Map<Integer, List<Integer>> map) {
+        for (Integer i : list) {
+            int digit = getDigitAtPosition(i, position);
+            if(map.get(digit) == null) {
+                map.put(digit, new ArrayList<>());
+            }
+            map.get(digit).add(i);
+        }
+    }
+
+    private static void collect(List<Integer> list, Map<Integer, List<Integer>> map) {
+        list.clear();
+        for (int i = 0; i < 10; i++) {
+            if(map.get(i) != null) {
+                list.addAll(map.get(i));
+            }
+        }
+        map.clear();
+    }
+
+    public static int getDigitAtPosition(int number, int position){
+        return (int)(number/Math.pow(10, position))%10;
     }
 }
