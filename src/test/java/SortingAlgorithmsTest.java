@@ -4,6 +4,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Created by yael on 31/12/16.
@@ -75,4 +76,31 @@ public class SortingAlgorithmsTest {
         Assert.assertEquals(Arrays.asList(-5,0,1,3,4,8,9,10), SortingAlgorithms.mergeSort(list));
     }
 
+    @Test
+    public void testMergeSort4(){
+        int[] arr = {};
+        SortingAlgorithms.mergeSort(arr);
+        Assert.assertEquals(0, arr.length);
+    }
+
+    @Test
+    public void testMergeSort5(){
+        int[] arr = {1};
+        SortingAlgorithms.mergeSort(arr);
+        IntStream.range(0,arr.length).forEach(i -> {Assert.assertEquals(arr[i], 1);});
+    }
+
+    @Test
+    public void testMergeSort6(){
+        int[] arr = {2,1};
+        SortingAlgorithms.mergeSort(arr);
+        IntStream.range(0,arr.length).forEach(i -> Assert.assertEquals(arr[i], i + 1));
+    }
+
+    @Test
+    public void testMergeSort7(){
+        int[] arr = {10,9,8};
+        SortingAlgorithms.mergeSort(arr);
+        IntStream.range(0,arr.length).forEach(i -> {Assert.assertEquals(arr[i], 8 + i);});
+    }
 }

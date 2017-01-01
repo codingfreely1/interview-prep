@@ -60,4 +60,48 @@ public class SortingAlgorithms {
 
         return res;
     }
+
+    public static void mergeSort(int[] arr) {
+        int[] helper = new int[arr.length];
+        mergeSort(arr, helper, 0, arr.length -1);
+    }
+
+    private static void mergeSort(int[] arr, int[] helper, int low, int high) {
+         if(low >= high) {
+            return;
+        }
+        int mid = (low + high)/2;
+        mergeSort(arr, helper, low, mid);
+        mergeSort(arr, helper, mid+1, high);
+        merge(arr, helper, low, mid , high);
+    }
+
+    private static void merge(int[] arr, int[] helper, int low, int mid, int high) {
+
+        for (int i = low; i <= high ; i++) {
+            helper[i] = arr[i];
+        }
+
+        int i = low;
+        int j = low;
+        int k = mid + 1;
+        while (i <= high) {
+            if(j <= mid & k <= high) {
+                if(helper[j] < helper[k]) {
+                    arr[i] = helper[j];
+                    j++;
+                } else {
+                    arr[i] = helper[k];
+                    k++;
+                }
+            } else if(j <= mid) {
+                arr[i] = helper[j];
+                j++;
+            } else if(k <= high) {
+                arr[i] = helper[k];
+                k++;
+            }
+            i++;
+        }
+    }
 }
