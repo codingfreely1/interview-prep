@@ -5,7 +5,7 @@ import java.util.List;
  */
 public class SearchAlgorithms {
 
-    public static boolean binarySearch(List<Comparable> arr, Comparable c){
+    public static <T extends Comparable<T>> boolean binarySearch(List<T> arr, T c){
         if(arr.isEmpty()) {
             return false;
         }
@@ -21,7 +21,7 @@ public class SearchAlgorithms {
         }
     }
 
-    public static int binarySearch(List<Comparable> arr, Comparable c, int start, int end){
+    public static <T extends Comparable<T>> int binarySearch(List<T> arr, T c, int start, int end){
         if(arr.isEmpty()) {
             return -1;
         }

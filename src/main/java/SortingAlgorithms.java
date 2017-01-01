@@ -6,7 +6,7 @@ import java.util.List;
  */
 public class SortingAlgorithms {
 
-    public static void bubbleSort(List<Comparable> arr) {
+    public static <T extends Comparable<T>> void bubbleSort(List<T> arr) {
         int numIter = arr.size() -1;
         for (int i = numIter; i >= 0; i--) {
             for (int j = 0; j < i; j++) {
@@ -17,8 +17,8 @@ public class SortingAlgorithms {
         }
     }
 
-    private static void swap(List<Comparable> arr, int inx1, int inx2){
-        Comparable comparable = arr.get(inx1);
+    private static <T extends Comparable<T>> void swap(List<T> arr, int inx1, int inx2){
+        T comparable = arr.get(inx1);
         arr.set(inx1, arr.get(inx2));
         arr.set(inx2, comparable);
     }

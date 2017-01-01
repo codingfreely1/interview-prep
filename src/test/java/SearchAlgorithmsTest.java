@@ -10,7 +10,7 @@ public class SearchAlgorithmsTest {
 
     @Test
     public void testBinarySearch1(){
-        ArrayList<Comparable> arr = new ArrayList<>();
+        ArrayList<Integer> arr = new ArrayList<>();
         Assert.assertFalse(SearchAlgorithms.binarySearch(arr, 3));
 
         arr.add(3);
@@ -24,7 +24,7 @@ public class SearchAlgorithmsTest {
 
     @Test
     public void testBinarySearch2(){
-        ArrayList<Comparable> arr = new ArrayList<>();
+        ArrayList<Integer> arr = new ArrayList<>();
         Assert.assertEquals(SearchAlgorithms.binarySearch(arr, 3, 0, arr.size()), -1);
 
         arr.add(3);
