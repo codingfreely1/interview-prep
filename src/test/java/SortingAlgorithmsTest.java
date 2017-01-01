@@ -116,14 +116,14 @@ public class SortingAlgorithmsTest {
 
     @Test
     public void testRadixSort(){
-        List<Integer> array = new ArrayList<>(Arrays.asList(312,52,10));
+        List<Integer> array = new ArrayList<>(Arrays.asList(312, 52, 10));
         SortingAlgorithms.radixSort(array, 3);
         Assert.assertEquals(Arrays.asList(10, 52, 312), array);
     }
 
     @Test
     public void testRadixSort1(){
-        List<Integer> array = new ArrayList<>(Arrays.asList(1000, 312,52,10, 1));
+        List<Integer> array = new ArrayList<>(Arrays.asList(1000, 312, 52, 10, 1));
         SortingAlgorithms.radixSort(array, 4);
         Assert.assertEquals(Arrays.asList(1,10,52,312,1000), array);
     }
