@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,4 +23,41 @@ public class SortingAlgorithms {
         arr.set(inx2, comparable);
     }
 
+    public static <T extends Comparable<T>> List<T> mergeSort(List<T> list) {
+        if(list.isEmpty() || list.size() == 1){
+            return list;
+        }
+
+        int mid = (list.size()-1) / 2;
+        List<T> leftList = list.subList(0, mid + 1);
+        List<T> rightList = list.subList(mid + 1, list.size());
+
+        return merge(mergeSort(leftList), mergeSort(rightList));
+    }
+
+    public static <T extends Comparable<T>> List<T> merge(List<T> list1, List<T> list2) {
+        int i= 0;
+        int j = 0;
+
+        List <T> res = new ArrayList<>(list1);
+
+        while (j < res.size()) {
+            while(i < list2.size() && res.get(j).compareTo(list2.get(i)) > 0 ) {
+                res.add(j, list2.get(i));
+                j++;
+                i++;
+            }
+            if(i == list2.size()) {
+                return res;
+            }
+            j++;
+        }
+
+        while (i < list2.size()) {
+            res.add(list2.get(i));
+            i++;
+        }
+
+        return res;
+    }
 }
