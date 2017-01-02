@@ -5,6 +5,7 @@ import java.util.*;
  */
 public class SortingAlgorithms {
 
+    //---- Bubble Sort----//
     public static <T extends Comparable<T>> void bubbleSort(List<T> arr) {
         int numIter = arr.size() -1;
         for (int i = numIter; i >= 0; i--) {
@@ -22,6 +23,7 @@ public class SortingAlgorithms {
         arr.set(inx2, comparable);
     }
 
+    //---- Merge Sort----//
     public static <T extends Comparable<T>> List<T> mergeSort(List<T> list) {
         if(list.isEmpty() || list.size() == 1){
             return list;
@@ -104,6 +106,7 @@ public class SortingAlgorithms {
         }
     }
 
+    //---- Radix Sort----//
     public static void radixSort(List<Integer> list, int maxDigits) {
         Map<Integer, List<Integer>> hashMap = new HashMap<>();
         for (int i = 0; i < maxDigits; i++) {
@@ -134,5 +137,37 @@ public class SortingAlgorithms {
 
     public static int getDigitAtPosition(int number, int position){
         return (int)(number/Math.pow(10, position))%10;
+    }
+
+    //---- Quick Sort----//
+    public static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pivot = partition(arr, low, high);
+            quickSort(arr, low, pivot-1);
+            quickSort(arr, pivot + 1, high);
+        }
+    }
+
+    private static int partition(int[] arr, int low, int high) {
+        int lowEnd = low;
+        int j = low;
+        int pivot = high;
+        while (j < high) {
+            if (arr[j] < arr[pivot]) {
+                swap(arr, lowEnd, j);
+                lowEnd++;
+            }
+            j++;
+        }
+        swap(arr, lowEnd, pivot);
+        return lowEnd;
+    }
+
+    public static void swap(int[] arr, int inx1, int inx2) {
+        if(inx1 != inx2 ) {
+            arr[inx1] = arr[inx1] + arr[inx2];
+            arr[inx2] = arr[inx1] - arr[inx2];
+            arr[inx1] = arr[inx1] - arr[inx2];
+        }
     }
 }

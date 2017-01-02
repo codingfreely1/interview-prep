@@ -128,4 +128,27 @@ public class SortingAlgorithmsTest {
         Assert.assertEquals(Arrays.asList(1,10,52,312,1000), array);
     }
 
+    @Test
+    public void testSwap(){
+        int[] arr = {2,1};
+        SortingAlgorithms.swap(arr,0,1);
+        Assert.assertTrue(arr[0] == 1);
+        Assert.assertTrue(arr[1] == 2);
+    }
+
+    @Test
+    public void testQuickSort(){
+        int[] arr = {2,1};
+        SortingAlgorithms.quickSort(arr,0,1);
+        Assert.assertTrue(arr[0] == 1);
+        Assert.assertTrue(arr[1] == 2);
+    }
+
+    @Test
+    public void testQuickSort2(){
+        int[] arr = {10,9,8,7,6,5,4,3,2,1};
+        SortingAlgorithms.quickSort(arr,0,9);
+        IntStream.range(0,10).forEach(i -> Assert.assertTrue(arr[i] == i+1));
+    }
+
 }
