@@ -1,3 +1,4 @@
+import datastructures.Listy;
 import jdk.nashorn.internal.runtime.BitVector;
 
 import java.util.List;
@@ -60,5 +61,22 @@ public class SortingAndSearchingSolutions {
                 bitVector.set(arr[i]-1);
             }
         }
+    }
+
+    /**
+     * 10.4 Sorted Search, No Size. (page 150)
+     * @param positiveAndSortedList
+     * @param x
+     * @return
+     */
+    public static int sortedSearchNoSize(Listy positiveAndSortedList, int x){
+        int limit = 0;
+        int i = 0;
+        while(positiveAndSortedList.elementAt(limit) != -1 && positiveAndSortedList.elementAt(i) < x) {
+            limit = (int) Math.pow(2,i);
+            i++;
+        }
+        System.out.println("calling binary search with limit " + limit);
+        return SearchAlgorithms.binarySearch(positiveAndSortedList.getArrayList(), x, 0, limit);
     }
 }

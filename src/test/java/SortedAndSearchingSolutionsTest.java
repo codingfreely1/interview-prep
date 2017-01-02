@@ -1,9 +1,12 @@
+import datastructures.Listy;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Created by yael on 01/01/17.
@@ -37,4 +40,21 @@ public class SortedAndSearchingSolutionsTest {
         SortingAndSearchingSolutions.findDuplicates(arr);
     }
 
+    @Test
+    public void testSortSearchNoSize(){
+        Listy listy = new Listy(Arrays.asList(1,2,3));
+        int i = SortingAndSearchingSolutions.sortedSearchNoSize(listy, 2);
+        Assert.assertEquals(1,i);
+
+        listy = new Listy(Collections.emptyList());
+        i = SortingAndSearchingSolutions.sortedSearchNoSize(listy, 2);
+        Assert.assertEquals(-1,i);
+
+        int limit = (int)Math.pow(2, 16) * 3;
+
+        Listy finalListy = new Listy(Collections.emptyList());
+        IntStream.range(0, limit).forEach(j -> finalListy.getArrayList().add(j));
+        i = SortingAndSearchingSolutions.sortedSearchNoSize(finalListy, 70000);
+        Assert.assertEquals(70000,i);
+    }
 }
