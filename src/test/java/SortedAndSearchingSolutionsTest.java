@@ -31,4 +31,10 @@ public class SortedAndSearchingSolutionsTest {
         }
     }
 
+    @Test
+    public void testFindDuplicates(){
+        int[] arr = {1,3003, 8, 1050, 1, 32000, 32000};
+        SortingAndSearchingSolutions.findDuplicates(arr);
+    }
+
 }

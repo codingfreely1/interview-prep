@@ -1,3 +1,5 @@
+import jdk.nashorn.internal.runtime.BitVector;
+
 import java.util.List;
 
 /**
@@ -42,6 +44,21 @@ public class SortingAndSearchingSolutions {
                 bInx--;
             }
             aCurInx--;
+        }
+    }
+
+    /**
+     * 10.8 Find Duplicates. (page 151)
+     * @param arr
+     */
+    public static void findDuplicates(int[] arr){
+        BitVector bitVector = new BitVector(32000);
+        for (int i = 0; i < arr.length; i++) {
+            if(bitVector.isSet(arr[i]-1)){
+                System.out.println(arr[i] + " is duplicate");
+            } else {
+                bitVector.set(arr[i]-1);
+            }
         }
     }
 }
