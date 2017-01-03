@@ -1,5 +1,7 @@
 package datastructures;
 
+import algorithms.ArraysAndStrings;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

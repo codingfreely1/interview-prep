@@ -1,6 +1,9 @@
+package solutions;
+
 import datastructures.Listy;
 import org.junit.Assert;
 import org.junit.Test;
+import solutions.SortingAndSearchingSolutions;
 
 import java.util.ArrayList;
 import java.util.Arrays;

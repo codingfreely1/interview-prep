@@ -1,3 +1,6 @@
+package solutions;
+
+import algorithms.SearchAlgorithms;
 import datastructures.Listy;
 import jdk.nashorn.internal.runtime.BitVector;
 

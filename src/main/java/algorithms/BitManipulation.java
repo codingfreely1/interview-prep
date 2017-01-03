@@ -1,3 +1,5 @@
+package algorithms;
+
 /**
  * Created by yael on 31/12/16.
  */

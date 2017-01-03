@@ -1,3 +1,5 @@
+package algorithms;
+
 import jdk.nashorn.internal.runtime.BitVector;
 
 import java.util.ArrayList;

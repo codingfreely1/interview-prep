@@ -1,3 +1,6 @@
+package algorithms;
+
+import algorithms.BitManipulation;
 import org.junit.Assert;
 import org.junit.Test;
 

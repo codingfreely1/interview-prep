@@ -1,3 +1,5 @@
+package algorithms;
+
 import model.Node;
 
 import java.util.HashSet;

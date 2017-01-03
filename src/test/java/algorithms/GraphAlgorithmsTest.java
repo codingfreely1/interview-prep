@@ -1,3 +1,6 @@
+package algorithms;
+
+import algorithms.GraphAlgorithms;
 import model.Node;
 import org.junit.Test;
 
