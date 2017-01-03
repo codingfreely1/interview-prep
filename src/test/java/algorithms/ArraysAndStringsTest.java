@@ -1,6 +1,5 @@
 package algorithms;
 
-import algorithms.ArraysAndStrings;
 import org.junit.Assert;
 import org.junit.Test;
 
