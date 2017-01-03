@@ -52,20 +52,15 @@ public class LinkedListSolutions {
     public static <T> void removeDuplicatesFromUnsortedListNoSpace(Node<T> list) {
         Node<T> cur = list;
         Node<T> runner;
-        Node<T> previous;
 
         while(cur != null) {
             T val = cur.getData();
-            runner = cur.getNext();
-            previous = cur;
-            while(runner != null){
-                if(runner.getData().equals(val)) {
+            runner = cur;
+            while(runner.getNext() != null){
+                if(runner.getNext().getData().equals(val)) {
                     //removing
-                    previous.setNext(runner.getNext());
-                    runner = previous.getNext();
-
-                } else  {
-                    previous = previous.getNext();
+                    runner.setNext(runner.getNext().getNext());
+                } else{
                     runner = runner.getNext();
                 }
             }

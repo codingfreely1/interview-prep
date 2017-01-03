@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,6 +34,13 @@ public class LinkedListSolutionsTest {
     @Test
     public void testRemoveDuplicatesNoSpace(){
         Node<Integer> linkedList = getTestList(Arrays.asList(1,4,66,4,1));
+        LinkedListSolutions.removeDuplicatesFromUnsortedListNoSpace(linkedList);
+        printList(linkedList);
+    }
+
+    @Test
+    public void testRemoveDuplicatesNoSpace2(){
+        Node<Integer> linkedList = getTestList(Arrays.asList(1,1,1,3));
         LinkedListSolutions.removeDuplicatesFromUnsortedListNoSpace(linkedList);
         printList(linkedList);
     }
