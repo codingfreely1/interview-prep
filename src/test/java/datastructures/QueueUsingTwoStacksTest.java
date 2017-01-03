@@ -20,8 +20,10 @@ public class QueueUsingTwoStacksTest {
         queue.add(3);
         queue.add(4);
 
+        Assert.assertEquals(queue.size(), 3);
         Assert.assertEquals(queue.remove().intValue(), 2);
         Assert.assertEquals(queue.remove().intValue(), 3);
+        Assert.assertEquals(queue.size(), 1);
         Assert.assertEquals(queue.remove().intValue(), 4);
 
     }

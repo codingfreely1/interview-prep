@@ -1,7 +1,5 @@
 package datastructures;
 
-import org.junit.Assert;
-
 import java.util.Stack;
 
 /**
@@ -19,31 +17,29 @@ public class QueueUsingTwoStacks<T> {
     }
 
     public void add(T element){
-        if(!removingStack.empty()) {
-            transferElementFromS1ToS2(removingStack, addingStack);
-        }
         addingStack.push(element);
     }
 
+    public int size(){
+        return addingStack.size() + removingStack.size();
+    }
+
     public T remove() {
-        if(!addingStack.empty()){
-            transferElementFromS1ToS2(addingStack, removingStack);
-        }
+        transferElementToBeRemovedIfNeeded();
         return removingStack.pop();
     }
 
     public T poll(){
-        if(!addingStack.empty()){
-            transferElementFromS1ToS2(addingStack, removingStack);
-        }
+        transferElementToBeRemovedIfNeeded();
         return removingStack.peek();
     }
 
-    private static <T> void transferElementFromS1ToS2(Stack<T> s1, Stack<T> s2) {
-        Assert.assertTrue(s2.empty());
-
-        while(!s1.empty()){
-            s2.push(s1.pop());
+    private void transferElementToBeRemovedIfNeeded() {
+        if(removingStack.empty()){ //if not empty do not push to keep the order right.
+            while(!addingStack.empty()){
+                removingStack.push(addingStack.pop());
+            }
         }
+
     }
 }
