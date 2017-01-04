@@ -1,10 +1,11 @@
 package algorithms;
 
-import algorithms.GraphAlgorithms;
 import model.Node;
+import model.ShortestPathNode;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by yael on 30/12/16.
@@ -78,5 +79,41 @@ public class GraphAlgorithmsTest {
         n3.getNeighbors().add(n4);
 
         return n0;
+    }
+
+    @Test
+    public void testDijkstra(){
+        ShortestPathNode<Character> graph = getTestGraphForDijkstra();
+        GraphAlgorithms.dijkstra(graph);
+        ShortestPathNode.printResults(graph);
+    }
+
+    private ShortestPathNode<Character> getTestGraphForDijkstra() {
+        ShortestPathNode<Character> a = new ShortestPathNode<>('A', new HashMap<>());
+        ShortestPathNode<Character> b = new ShortestPathNode<>('B', new HashMap<>());
+        ShortestPathNode<Character> c = new ShortestPathNode<>('C', new HashMap<>());
+        ShortestPathNode<Character> d = new ShortestPathNode<>('D', new HashMap<>());
+        ShortestPathNode<Character> e = new ShortestPathNode<>('E', new HashMap<>());
+
+        a.getNeighbors().put(b, 6);
+        a.getNeighbors().put(d,1);
+
+        b.getNeighbors().put(a,6);
+        b.getNeighbors().put(d,2);
+        b.getNeighbors().put(e, 2);
+        b.getNeighbors().put(c,5);
+
+        c.getNeighbors().put(b,5);
+        c.getNeighbors().put(e, 5);
+
+        d.getNeighbors().put(a, 1);
+        d.getNeighbors().put(b, 2);
+        d.getNeighbors().put(e, 1);
+
+        e.getNeighbors().put(b, 2);
+        e.getNeighbors().put(c, 5);
+        e.getNeighbors().put(d,1);
+
+        return a;
     }
 }

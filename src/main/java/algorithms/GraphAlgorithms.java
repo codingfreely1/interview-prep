@@ -1,11 +1,9 @@
 package algorithms;
 
 import model.Node;
+import model.ShortestPathNode;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by yael on 30/12/16.
@@ -40,6 +38,35 @@ public class GraphAlgorithms {
                 traversDFS(n);
             }
         });
+    }
+
+    public static <T extends Comparable<T>> void dijkstra(ShortestPathNode<T> source){
+        Queue<ShortestPathNode<T>> queue = new LinkedList<>();
+        Set<ShortestPathNode<T>> visited = new HashSet<>();
+
+        source.setDistance(0);
+        queue.add(source);
+
+        while (!queue.isEmpty()) {
+            ShortestPathNode<T> cur = queue.remove();
+
+            Map<ShortestPathNode<T>, Integer> edges = cur.getNeighbors();
+            Set<ShortestPathNode<T>> s = cur.getNeighbors().keySet();
+            ArrayList<ShortestPathNode<T>> sorted = new ArrayList<>(s);
+            Collections.sort(sorted);
+
+            sorted.forEach(n -> {
+                if(!visited.contains(n)){
+                    queue.add(n);
+                    int newDistance = cur.getDistance() + edges.get(n);
+                    if(newDistance < n.getDistance()){
+                        n.setDistance(newDistance);
+                        n.setPrev(cur);
+                    }
+                }
+            });
+            visited.add(cur);
+        }
     }
 
 }
