@@ -80,4 +80,20 @@ public class RecursionAndDynamicProgrammingTest {
         findPath(path, new Position(0,0), new Position(2,2) , new Position(3,3));
         System.out.println(Utils.listWithCommaSeparator(path));
     }
+
+    @Test
+    public void testMagicIndex(){
+        int[] arr = {-2,-3, 2, 4,5} ;
+        int magicIndex = searchMagicIndex(arr, 0, arr.length-1);
+        Assert.assertEquals(2, magicIndex);
+
+        int[] arr2 = {0,2, 3, 4,5} ;
+        magicIndex = searchMagicIndex(arr2, 0, arr.length-1);
+        Assert.assertEquals(0, magicIndex);
+
+        int[] arr3 = {-1,2,1,3,5,6} ;
+        magicIndex = searchMagicIndex(arr3, 0, arr.length-1);
+        Assert.assertEquals(3, magicIndex);
+
+    }
 }

@@ -79,6 +79,29 @@ public class RecursionAndDynamicProgramming {
             return true;
     }
 
+    /**
+     * q 8.3 page 135
+     * O(logN) running time.
+     * @param arr
+     * @param start
+     * @param end in bounds index
+     * @return
+     */
+    static int searchMagicIndex (int[] arr, int start, int end) {
 
+        if(start > end ){
+            return -1;
+        }
+
+        int midInx = (start + end)/2;
+        int value = arr[midInx];
+        if( midInx > value ) {
+            return searchMagicIndex(arr, midInx+1, end) ;
+        } else if( midInx < value ) {
+            return searchMagicIndex(arr, start,midInx-1) ;
+        } else {
+            return midInx;
+        }
+    }
 
 }
