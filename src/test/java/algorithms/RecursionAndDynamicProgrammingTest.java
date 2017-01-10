@@ -1,8 +1,12 @@
 package algorithms;
 
+import algorithms.model.Position;
 import org.junit.Assert;
 import org.junit.Test;
+import util.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import java.util.stream.IntStream;
 
@@ -68,5 +72,12 @@ public class RecursionAndDynamicProgrammingTest {
         IntStream.range(0,n).forEach(j -> {
             source.push(n - j);
         });
+    }
+
+    @Test
+    public void testFindPath(){
+        List<Position.Direction> path = new ArrayList<>();
+        findPath(path, new Position(0,0), new Position(2,2) , new Position(3,3));
+        System.out.println(Utils.listWithCommaSeparator(path));
     }
 }
