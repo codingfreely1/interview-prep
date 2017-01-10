@@ -1,6 +1,7 @@
 package algorithms;
 
 import algorithms.model.Position;
+import util.Utils;
 
 import java.util.List;
 import java.util.Stack;
@@ -104,4 +105,29 @@ public class RecursionAndDynamicProgramming {
         }
     }
 
+    /**
+     *
+     * @param list
+     * @param n - number of pairs.
+     * @param open
+     * @param close
+     */
+    static void printLegalParens(List<Character> list, int n, int open, int close) {
+
+        if(open + close == 2*n){
+            System.out.println(Utils.listWithSeparator(list, ""));
+        }
+
+        if(open > close){
+            list.add(')');
+            printLegalParens(list, n, open, close + 1);
+            list.remove(list.size()-1);
+        }
+
+        if(open < n) {
+            list.add('(');
+            printLegalParens(list, n, open + 1, close);
+            list.remove(list.size()-1);
+        }
+    }
 }

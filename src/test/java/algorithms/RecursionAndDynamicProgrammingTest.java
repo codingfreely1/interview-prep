@@ -94,6 +94,13 @@ public class RecursionAndDynamicProgrammingTest {
         int[] arr3 = {-1,2,1,3,5,6} ;
         magicIndex = searchMagicIndex(arr3, 0, arr.length-1);
         Assert.assertEquals(3, magicIndex);
+    }
 
+    @Test
+    public void testPrintParens() {
+        for (int i = 0; i < 4; i++) {
+            System.out.println("i = " + i);
+            printLegalParens(new ArrayList<>(), i, 0, 0);
+        }
     }
 }
