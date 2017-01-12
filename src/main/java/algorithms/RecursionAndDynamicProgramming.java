@@ -150,17 +150,6 @@ public class RecursionAndDynamicProgramming {
             return;
         }
 
-        List<Position> validPositionsInCurRow = findValidPositionsInCurRow(curRow, curPositions, n);
-
-        for(Position p : validPositionsInCurRow) {
-            curPositions.add(p);
-            placeQueens(n, curPositions, curRow -1, results);
-            curPositions.remove(curPositions.size()-1);
-        }
-    }
-
-    private static List<Position>  findValidPositionsInCurRow (int curRow, List<Position> curPositions, int n){
-        List<Position> valid = new ArrayList<>();
         boolean validPos;
         for (int col = 0 ; col < n ; col++){
             validPos = true;
@@ -170,12 +159,13 @@ public class RecursionAndDynamicProgramming {
                     break;
                 }
             }
-            if(validPos) {
-                valid.add(new Position(curRow, col));
-            }
 
+            if(validPos) {
+                curPositions.add(new Position(curRow, col));
+                placeQueens(n, curPositions, curRow -1, results);
+                curPositions.remove(curPositions.size()-1);
+            }
         }
-        return valid;
     }
 
     private static boolean sameCol(int col, Position p){
