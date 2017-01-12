@@ -103,4 +103,14 @@ public class RecursionAndDynamicProgrammingTest {
             printLegalParens(new ArrayList<>(), i, 0, 0);
         }
     }
+
+    @Test
+    public void testQueensPlacementsOnBoard(){
+        List<List<Position>> possiblePlacements = RecursionAndDynamicProgramming.placeQueens(8);
+        possiblePlacements.forEach(i -> {
+            System.out.println(Utils.listWithCommaSeparator(i));
+        });
+
+    }
+
 }

@@ -3,6 +3,7 @@ package algorithms;
 import algorithms.model.Position;
 import util.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
@@ -129,5 +130,59 @@ public class RecursionAndDynamicProgramming {
             printLegalParens(list, n, open + 1, close);
             list.remove(list.size()-1);
         }
+    }
+
+    /**
+     * q 8.12
+     * @param n
+     * @return
+     */
+    static List<List<Position>> placeQueens (int n){
+        List<List<Position>> results = new ArrayList<>();
+        List<Position> curPositions = new ArrayList<>();
+        placeQueens(n, curPositions, n-1, results);
+        return results;
+    }
+
+    private static void  placeQueens (int n, List<Position> curPositions, int curRow, List<List<Position>> results) {
+        if(curPositions.size() == n) {
+            results.add(new ArrayList<>(curPositions));
+            return;
+        }
+
+        List<Position> validPositionsInCurRow = findValidPositionsInCurRow(curRow, curPositions, n);
+
+        for(Position p : validPositionsInCurRow) {
+            curPositions.add(p);
+            placeQueens(n, curPositions, curRow -1, results);
+            curPositions.remove(curPositions.size()-1);
+        }
+    }
+
+    private static List<Position>  findValidPositionsInCurRow (int curRow, List<Position> curPositions, int n){
+        List<Position> valid = new ArrayList<>();
+        boolean validPos;
+        for (int col = 0 ; col < n ; col++){
+            validPos = true;
+            for(Position p : curPositions) {
+                if(sameCol(col, p) || sameDiagonal(curRow, col, p)){
+                    validPos = false;
+                    break;
+                }
+            }
+            if(validPos) {
+                valid.add(new Position(curRow, col));
+            }
+
+        }
+        return valid;
+    }
+
+    private static boolean sameCol(int col, Position p){
+        return p.getCol() == col;
+    }
+
+    private static boolean sameDiagonal(int row, int col, Position p){
+        return (Math.abs(p.getRow() - row) == 1) && ( Math.abs(p.getCol() - col) == 1);
     }
 }
