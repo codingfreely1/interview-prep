@@ -6,6 +6,7 @@ import org.junit.Test;
 import util.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.IntStream;
@@ -106,9 +107,14 @@ public class RecursionAndDynamicProgrammingTest {
 
     @Test
     public void testQueensPlacementsOnBoard(){
-        List<List<Position>> possiblePlacements = RecursionAndDynamicProgramming.placeQueens(8);
-        possiblePlacements.forEach(i -> {
-            System.out.println(Utils.listWithCommaSeparator(i));
+        List<Integer[]> possiblePlacements = RecursionAndDynamicProgramming.placeQueens(8);
+        StringBuilder sb = new StringBuilder();
+        possiblePlacements.forEach(arr -> {
+            for (int j = 0; j < arr.length; j++) {
+                sb.append("(").append(j).append(",").append(arr[j]).append(')');
+            }
+            System.out.println(sb.toString());
+            sb.setLength(0);
         });
 
     }
