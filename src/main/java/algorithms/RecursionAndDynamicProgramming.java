@@ -1,12 +1,10 @@
 package algorithms;
 
 import algorithms.model.Position;
+import datastructures.Entry;
 import util.Utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by yael on 05/01/17.
@@ -189,15 +187,23 @@ public class RecursionAndDynamicProgramming {
      * @return
      */
     static int evaluate(String expression, boolean val) {
-        if(expression.isEmpty()) {
+        recursionLevel++;
+        Entry<String, Boolean> entry = new Entry<>(expression, val);
+        if(useOptimization) {
+            if(calculatedValues.get(entry) != null){
+                return calculatedValues.get(entry);
+            }
+        }
+
+        if (expression.isEmpty()) {
             return 1;
         }
 
-        if(expression.equals("0")){
+        if (expression.equals("0")) {
             return val ? 0 : 1;
         }
 
-        if(expression.equals("1")){
+        if (expression.equals("1")) {
             return val ? 1 : 0;
         }
 
@@ -220,8 +226,15 @@ public class RecursionAndDynamicProgramming {
                 }
             }
         }
+        if(useOptimization){
+            calculatedValues.put(entry, numWays);
+        }
         return numWays;
     }
+
+    public static boolean useOptimization = true;
+    public static int recursionLevel = 0;
+    private static Map<Entry<String, Boolean>, Integer> calculatedValues = new HashMap<>();
 
     static int getNumForOr(String left,String right, boolean val){
         int numWays = 0;

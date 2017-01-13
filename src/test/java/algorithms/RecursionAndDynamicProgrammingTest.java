@@ -125,6 +125,13 @@ public class RecursionAndDynamicProgrammingTest {
         Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&1", true), 0);
         Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&1|0", false), 2);
         Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("1^0|0|1", false), 2);
+
+        useOptimization = false;
         Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&0&0&1^1|0", true), 10);
+        System.out.println("recursionLevel: " + recursionLevel);
+        recursionLevel = 0;
+        useOptimization = true;
+        Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&0&0&1^1|0", true), 10);
+        System.out.println("recursionLevel: " + recursionLevel);
     }
 }
