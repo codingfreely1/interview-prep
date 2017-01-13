@@ -119,4 +119,12 @@ public class RecursionAndDynamicProgrammingTest {
 
     }
 
+    @Test
+    public void testBooleanEvaluation(){
+        Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&1", false), 1);
+        Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&1", true), 0);
+        Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&1|0", false), 2);
+        Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("1^0|0|1", false), 2);
+        Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&0&0&1^1|0", true), 10);
+    }
 }

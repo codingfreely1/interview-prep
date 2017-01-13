@@ -181,4 +181,88 @@ public class RecursionAndDynamicProgramming {
     private static boolean sameDiagonal(int row1, int col1, int row2, int col2){
         return (Math.abs(row2 - row1) == Math.abs(col2 - col1));
     }
+
+    /**
+     * q 8.14 Boolean Evaluation
+     * @param expression
+     * @param val
+     * @return
+     */
+    static int evaluate(String expression, boolean val) {
+        if(expression.isEmpty()) {
+            return 1;
+        }
+
+        if(expression.equals("0")){
+            return val ? 0 : 1;
+        }
+
+        if(expression.equals("1")){
+            return val ? 1 : 0;
+        }
+
+        int numWays = 0;
+        for (int i = 0; i < expression.length(); i++) {
+            char op = expression.charAt(i);
+            if(op == '&' || op == '|' || op == '^') {
+                String leftSide = expression.substring(0, i);
+                String rightSide = "";
+
+                if(i+1 < expression.length()){
+                    rightSide = expression.substring(i+1, expression.length()); //split[1];
+                }
+                if (op == '&') {
+                    numWays += getNumForAnd(leftSide, rightSide, val);
+                } else if (op == '|') {
+                    numWays += getNumForOr(leftSide, rightSide, val);
+                } else {// (op == '^') {
+                    numWays += getNumForXor(leftSide, rightSide, val);
+                }
+            }
+        }
+        return numWays;
+    }
+
+    static int getNumForOr(String left,String right, boolean val){
+        int numWays = 0;
+        if(val){
+            numWays += getFinalNumber(left, right, val, !val);
+            numWays += getFinalNumber(left, right, !val, val);
+        }
+        numWays += getFinalNumber(left, right, val, val);
+        return numWays;
+    }
+
+    static int getNumForAnd(String left,String right, boolean val){
+        int numWays = 0;
+        if(!val){
+            numWays += getFinalNumber(left, right, val, !val);
+            numWays += getFinalNumber(left, right, !val, val);
+        }
+        numWays += getFinalNumber(left, right, val, val);
+        return numWays;
+    }
+
+    static int getNumForXor(String left,String right, boolean val){
+        int numWays = 0;
+        if(val){
+            numWays += getFinalNumber(left, right, val, !val);
+            numWays += getFinalNumber(left, right, !val, val);
+        } else {
+            numWays += getFinalNumber(left, right, val, val);
+            numWays += getFinalNumber(left, right, !val, !val);
+        }
+        return numWays;
+    }
+
+    static int getFinalNumber(String leftSide,String rightSide,  boolean rightVal, boolean leftVal){
+        int numLeft= evaluate(leftSide, leftVal);
+        int numRight = evaluate(rightSide, rightVal);
+
+        if(numLeft > 0 && numRight > 0){
+            return numLeft * numRight;
+        }
+        return 0;
+    }
+
 }
