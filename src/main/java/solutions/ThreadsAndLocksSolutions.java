@@ -1,6 +1,6 @@
 package solutions;
 
-import solutions.buzzfeeedthreads.FizzBuzzThread;
+import solutions.fizzbuzz.FizzBuzzThread;
 
 import java.util.Arrays;
 import java.util.function.Predicate;

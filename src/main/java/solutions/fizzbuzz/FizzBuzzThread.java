@@ -1,4 +1,4 @@
-package solutions.buzzfeeedthreads;
+package solutions.fizzbuzz;
 
 import java.util.function.Predicate;
 
