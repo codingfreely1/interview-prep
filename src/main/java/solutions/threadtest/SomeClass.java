@@ -1,4 +1,4 @@
-package solutions.threadTest;
+package solutions.threadtest;
 
 /**
  * Created by yael on 12/01/17.

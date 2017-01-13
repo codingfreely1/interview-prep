@@ -1,8 +1,8 @@
 package solutions;
 
 import org.junit.Test;
-import solutions.threadTest.TestThread;
-import solutions.threadTest.SomeClass;
+import solutions.threadtest.TestThread;
+import solutions.threadtest.SomeClass;
 
 import java.util.function.Consumer;
 
@@ -88,5 +88,13 @@ public class ThreadsAndLocksSolutionsTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Testing multi threaded FizzBuzz problem.
+     */
+    @Test
+    public void testMultiThreadedFizzBuzz(){
+        ThreadsAndLocksSolutions.multiThreadedFizzBuzz(50);
     }
 }

@@ -1,4 +1,4 @@
-package solutions.threadTest;
+package solutions.threadtest;
 
 import java.util.function.Consumer;
 
