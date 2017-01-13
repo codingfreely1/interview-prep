@@ -1,4 +1,4 @@
-package solutions.runnables;
+package solutions.threadTest;
 
 import java.util.function.Consumer;
 

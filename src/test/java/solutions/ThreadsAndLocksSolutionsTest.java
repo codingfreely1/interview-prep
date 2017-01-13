@@ -1,7 +1,7 @@
 package solutions;
 
 import org.junit.Test;
-import solutions.runnables.TestThread;
+import solutions.threadTest.TestThread;
 import solutions.threadTest.SomeClass;
 
 import java.util.function.Consumer;
