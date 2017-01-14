@@ -8,6 +8,7 @@ import util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 import static algorithms.RecursionAndDynamicProgramming.*;
@@ -136,16 +137,7 @@ public class RecursionAndDynamicProgrammingTest {
 
     @Test
     public void testFindAllSubset(){
-        int[] set1 = {0, 1};
-        List<List<Integer>> list =  RecursionAndDynamicProgramming.findsAllSubset(set1);
-        Assert.assertEquals(4, list.size());
-        list.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
-
-        int[] set2 = {0, 1, 2};
-        List<List<Integer>> list2 =  RecursionAndDynamicProgramming.findsAllSubset(set2);
-        Assert.assertEquals(8, list2.size());
-        list2.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
-
+        testFindAllSubsetFunction(RecursionAndDynamicProgramming::findAllSubset);
     }
 
     @Test
@@ -166,26 +158,28 @@ public class RecursionAndDynamicProgrammingTest {
 
     @Test
     public void testFindAllSubsetIteratively(){
-        int[] set1 = {0, 1};
-        List<List<Integer>> list =  RecursionAndDynamicProgramming.findsAllSubsetIteratively(set1);
-        Assert.assertEquals(4, list.size());
-        list.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
+        testFindAllSubsetFunction(RecursionAndDynamicProgramming::findAllSubsetIteratively);
 
-        int[] set2 = {0, 1, 2};
-        List<List<Integer>> list2 =  RecursionAndDynamicProgramming.findsAllSubsetIteratively(set2);
-        Assert.assertEquals(8, list2.size());
-        list2.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
+    }
+
+    @Test
+    public void testFindAllSubsetIteratively2(){
+        testFindAllSubsetFunction(RecursionAndDynamicProgramming::findAllSubsetIteratively2);
     }
 
     @Test
     public void testFindAllSubsetSolution3(){
-        int[] set1 = {0, 1};
-        List<List<Integer>> list =  RecursionAndDynamicProgramming.findAllSubsetSolution3(set1);
+        testFindAllSubsetFunction(RecursionAndDynamicProgramming::findAllSubsetSolution3);
+    }
+
+    private void testFindAllSubsetFunction(Function<Integer[], List<List<Integer>>> function){
+        Integer[] set1 = {0, 1};
+        List<List<Integer>> list =  function.apply(set1);
         Assert.assertEquals(4, list.size());
         list.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
 
-        int[] set2 = {0, 1, 2};
-        List<List<Integer>> list2 =  RecursionAndDynamicProgramming.findAllSubsetSolution3(set2);
+        Integer[] set2 = {0, 1, 2};
+        List<List<Integer>> list2 = function.apply(set2);
         Assert.assertEquals(8, list2.size());
         list2.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
     }

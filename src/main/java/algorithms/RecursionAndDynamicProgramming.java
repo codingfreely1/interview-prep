@@ -282,14 +282,14 @@ public class RecursionAndDynamicProgramming {
      * @param set
      * @return
      */
-    static List<List<Integer>> findsAllSubset(int[] set){
+    static List<List<Integer>> findAllSubset(Integer[] set){
         List<List<Integer>> list = new ArrayList<>();
         List<Integer> cur = new ArrayList<>();
         findAllSubsetHelper(set, 0, list, cur);
         return list;
     }
 
-    private static void findAllSubsetHelper(int[] set, int curIndex, List<List<Integer>> list, List<Integer> cur){
+    private static void findAllSubsetHelper(Integer[] set, int curIndex, List<List<Integer>> list, List<Integer> cur){
         if(curIndex >= set.length){
             list.add(new ArrayList<>(cur));
             return;
@@ -306,7 +306,7 @@ public class RecursionAndDynamicProgramming {
      * @param set
      * @return
      */
-    static List<List<Integer>> findsAllSubsetIteratively(int[] set){
+    static List<List<Integer>> findAllSubsetIteratively(Integer[] set){
         List<List<Integer>> list = new ArrayList<>();
         List<Integer> cur = new ArrayList<>();
 
@@ -327,28 +327,49 @@ public class RecursionAndDynamicProgramming {
         return list;
     }
 
-    private static HashMap<Integer, Integer> powersOfTwo = new HashMap<>();
-
     public static boolean isBitSetInIndex(int index, int number){
-        if(powersOfTwo.get(index) == null) {
-            Integer lastVal = powersOfTwo.get(index);
-            if(lastVal != null){
-                powersOfTwo.put(index,lastVal*2);
-            } else {
-                powersOfTwo.put(index,(int)Math.pow(2,index));
-            }
-        }
-        int mask = powersOfTwo.get(index);
+        int mask = 1 << index; // equivalent to Math.pow(2,index)
         int res = number & mask;
         return res > 0;
     }
 
     /**
+     * q 8.4 Power Set - Solution 2.5
+     * @param set
+     * @return
+     */
+    static List<List<Integer>> findAllSubsetIteratively2(Integer[] set){
+        List<List<Integer>> list = new ArrayList<>();
+
+        int n = set.length;
+        int numberOfSubset = 1 << n;//equivalent to Math.pow(2, n);
+        int i = 0;
+        while (i < numberOfSubset){
+            list.add(getSetFromNumber(i, set));
+            i++;
+        }
+
+        return list;
+    }
+
+    private static List<Integer> getSetFromNumber(int number, Integer[] set){
+        List<Integer> cur = new ArrayList<>();
+        int index = 0;
+
+        for (int j = number; j > 0 ; j = j>>1 ) { //shift j by one each iteration - equivalent to dividing j by 2 in each iteration.
+            if( (j & 1) == 1 ){ //if the bit in 0 is 1.
+                cur.add(set[index]);
+            }
+            index++;
+        }
+        return cur;
+    }
+    /**
      * q 8.4 Power Set - Solution 3
      * @param set
      * @return
      */
-    static List<List<Integer>> findAllSubsetSolution3(int[] set){
+    static List<List<Integer>> findAllSubsetSolution3(Integer[] set){
         List<List<Integer>> allSubsets = new ArrayList<>();
         allSubsets.add(new ArrayList<>()); // adding empty set for base case
 
