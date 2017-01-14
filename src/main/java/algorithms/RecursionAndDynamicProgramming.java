@@ -277,4 +277,90 @@ public class RecursionAndDynamicProgramming {
         return 0;
     }
 
+    /**
+     * q 8.4 Power Set - Solution 1
+     * @param set
+     * @return
+     */
+    static List<List<Integer>> findsAllSubset(int[] set){
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> cur = new ArrayList<>();
+        findAllSubsetHelper(set, 0, list, cur);
+        return list;
+    }
+
+    private static void findAllSubsetHelper(int[] set, int curIndex, List<List<Integer>> list, List<Integer> cur){
+        if(curIndex >= set.length){
+            list.add(new ArrayList<>(cur));
+            return;
+        }
+
+        cur.add(set[curIndex]);
+        findAllSubsetHelper(set, curIndex + 1, list, cur);
+        cur.remove(cur.size()-1);
+        findAllSubsetHelper(set, curIndex + 1, list, cur);
+    }
+
+    /**
+     * q 8.4 Power Set - Solution 2
+     * @param set
+     * @return
+     */
+    static List<List<Integer>> findsAllSubsetIteratively(int[] set){
+        List<List<Integer>> list = new ArrayList<>();
+        List<Integer> cur = new ArrayList<>();
+
+        int n = set.length;
+        int numberOfSubset = (int) Math.pow(2, n);
+        int i = 0;
+        while (i < numberOfSubset){
+            for (int j = 0; j < n; j++) {
+                if(isBitSetInIndex(j, i)){
+                    cur.add(set[j]);
+                }
+            }
+            list.add(cur);
+            cur = new ArrayList<>();
+            i++;
+        }
+
+        return list;
+    }
+
+    private static HashMap<Integer, Integer> powersOfTwo = new HashMap<>();
+
+    public static boolean isBitSetInIndex(int index, int number){
+        if(powersOfTwo.get(index) == null) {
+            Integer lastVal = powersOfTwo.get(index);
+            if(lastVal != null){
+                powersOfTwo.put(index,lastVal*2);
+            } else {
+                powersOfTwo.put(index,(int)Math.pow(2,index));
+            }
+        }
+        int mask = powersOfTwo.get(index);
+        int res = number & mask;
+        return res > 0;
+    }
+
+    /**
+     * q 8.4 Power Set - Solution 3
+     * @param set
+     * @return
+     */
+    static List<List<Integer>> findAllSubsetSolution3(int[] set){
+        List<List<Integer>> allSubsets = new ArrayList<>();
+        allSubsets.add(new ArrayList<>()); // adding empty set for base case
+
+        for (int i = 0; i < set.length; i++) {
+            List<List<Integer>> cloned = new ArrayList<>(allSubsets);
+            int currentVal = set[i];
+            for(List<Integer> subset : cloned){
+                List<Integer> newSubset = new ArrayList<>(subset);
+                newSubset.add(currentVal);
+                allSubsets.add(newSubset);
+            }
+        }
+        return allSubsets;
+    }
 }

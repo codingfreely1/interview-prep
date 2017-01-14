@@ -6,7 +6,6 @@ import org.junit.Test;
 import util.Utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.IntStream;
@@ -133,5 +132,61 @@ public class RecursionAndDynamicProgrammingTest {
         useOptimization = true;
         Assert.assertEquals(RecursionAndDynamicProgramming.evaluate("0&0&0&1^1|0", true), 10);
         System.out.println("recursionLevel: " + recursionLevel);
+    }
+
+    @Test
+    public void testFindAllSubset(){
+        int[] set1 = {0, 1};
+        List<List<Integer>> list =  RecursionAndDynamicProgramming.findsAllSubset(set1);
+        Assert.assertEquals(4, list.size());
+        list.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
+
+        int[] set2 = {0, 1, 2};
+        List<List<Integer>> list2 =  RecursionAndDynamicProgramming.findsAllSubset(set2);
+        Assert.assertEquals(8, list2.size());
+        list2.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
+
+    }
+
+    @Test
+    public void testIsBitSetInIndex(){
+        Assert.assertTrue(RecursionAndDynamicProgramming.isBitSetInIndex(0, 1));
+        Assert.assertFalse(RecursionAndDynamicProgramming.isBitSetInIndex(0, 0));
+
+        Assert.assertTrue(RecursionAndDynamicProgramming.isBitSetInIndex(0, 3));
+        Assert.assertTrue(RecursionAndDynamicProgramming.isBitSetInIndex(1, 3));
+        Assert.assertFalse(RecursionAndDynamicProgramming.isBitSetInIndex(2, 3));
+
+        Assert.assertFalse(RecursionAndDynamicProgramming.isBitSetInIndex(1, 8));
+        Assert.assertFalse(RecursionAndDynamicProgramming.isBitSetInIndex(2, 8));
+        Assert.assertTrue(RecursionAndDynamicProgramming.isBitSetInIndex(3, 8));
+
+        Assert.assertTrue(RecursionAndDynamicProgramming.isBitSetInIndex(8, 256));
+    }
+
+    @Test
+    public void testFindAllSubsetIteratively(){
+        int[] set1 = {0, 1};
+        List<List<Integer>> list =  RecursionAndDynamicProgramming.findsAllSubsetIteratively(set1);
+        Assert.assertEquals(4, list.size());
+        list.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
+
+        int[] set2 = {0, 1, 2};
+        List<List<Integer>> list2 =  RecursionAndDynamicProgramming.findsAllSubsetIteratively(set2);
+        Assert.assertEquals(8, list2.size());
+        list2.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
+    }
+
+    @Test
+    public void testFindAllSubsetSolution3(){
+        int[] set1 = {0, 1};
+        List<List<Integer>> list =  RecursionAndDynamicProgramming.findAllSubsetSolution3(set1);
+        Assert.assertEquals(4, list.size());
+        list.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
+
+        int[] set2 = {0, 1, 2};
+        List<List<Integer>> list2 =  RecursionAndDynamicProgramming.findAllSubsetSolution3(set2);
+        Assert.assertEquals(8, list2.size());
+        list2.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
     }
 }
