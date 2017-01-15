@@ -1,7 +1,7 @@
 package solutions;
 
 import org.junit.Assert;
-
+import model.Pair;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -91,5 +91,43 @@ public class InterviewQuestionsSolutions {
         return isSubsetFound;
     }
     //mh interview questions. - end
+
+    //google interview question from youtube
+    static Pair<Integer, Integer> findPairMatchSumInOrderedArray(int[] arr, int sum) {
+        int startInx = 0 ;
+        int endInx = arr.length -1;
+
+        while(startInx < endInx) {
+
+            if(arr[startInx] > sum) { //since the array is sorted in ascending order if first is larger than sum we wont be able to find a match.
+                System.out.println("in" + startInx + ", " + endInx);
+                return null;
+            }
+
+            int curSum = arr[startInx] + arr[endInx];
+            if(curSum == sum) {
+                return new Pair<>(startInx, endInx);
+            } else if(curSum < sum) {
+                startInx++;
+            } else {
+                endInx--;
+            }
+        }
+        return null;
+    }
+
+    static Pair<Integer, Integer> findPairMatchSumInUnsortedArray(int[] arr, int sum) {
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(int i=0; i< arr.length ; i++){
+            int curVal = arr[i];
+            Integer index = map.get(curVal);
+            if(index != null){
+                return new Pair<>(index, i);
+            }
+            map.put(sum-curVal, i);
+        }
+        return null;
+    }
 
 }

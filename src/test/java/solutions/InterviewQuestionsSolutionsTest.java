@@ -1,5 +1,6 @@
 package solutions;
 
+import model.Pair;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,5 +41,35 @@ public class InterviewQuestionsSolutionsTest {
         Assert.assertTrue(InterviewQuestionsSolutions.isSubsetEqualsToSumExist(arr4, 1));
         Assert.assertFalse(InterviewQuestionsSolutions.isSubsetEqualsToSumExist(arr4, 100));
 
+    }
+
+    @Test
+    public void testFindPairMatchSumInOrderedArray(){
+        int[] arr = {2, 9, 10, 22, 56, 78};
+
+        Pair<Integer, Integer> pair = InterviewQuestionsSolutions.findPairMatchSumInOrderedArray(arr, 1);
+        Assert.assertNull(pair);
+
+        pair = InterviewQuestionsSolutions.findPairMatchSumInOrderedArray(arr, 101);
+        Assert.assertNull(pair);
+
+        pair = InterviewQuestionsSolutions.findPairMatchSumInOrderedArray(arr, 32);
+        Pair<Integer, Integer> expected = new Pair<>(2,3);
+        Assert.assertEquals(expected,pair);
+
+        int[] arr2 = {-50, -22, 0, 2, 9, 10, 22, 56, 78};
+        pair = InterviewQuestionsSolutions.findPairMatchSumInOrderedArray(arr2, 0);
+        expected = new Pair<>(1,6);
+        Assert.assertEquals(expected,pair);
+    }
+
+    @Test
+    public void testFindPairMatchSumInUnOrderedArray(){
+        int[] arr = {2, 9, 22, 56, 10, 78};
+        Pair<Integer, Integer> pair = InterviewQuestionsSolutions.findPairMatchSumInUnsortedArray(arr, 1);
+        Assert.assertNull(pair);
+        pair = InterviewQuestionsSolutions.findPairMatchSumInUnsortedArray(arr, 32);
+        Pair<Integer, Integer> expected = new Pair<>(2,4);
+        Assert.assertEquals(expected,pair);
     }
 }
