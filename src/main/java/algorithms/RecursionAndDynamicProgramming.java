@@ -445,7 +445,7 @@ public class RecursionAndDynamicProgramming {
         Map<Character, Integer> map = new HashMap<>();
         for(int i = 0; i <  s.length(); i++) {
             char cur = s.charAt(i);
-            if (map.get(cur) == null ) {
+            if (!map.containsKey(cur)) {
                 map.put(cur, 1);
             } else {
                 map.put(cur, map.get(cur) +1);
