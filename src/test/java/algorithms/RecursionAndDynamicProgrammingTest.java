@@ -183,4 +183,42 @@ public class RecursionAndDynamicProgrammingTest {
         Assert.assertEquals(8, list2.size());
         list2.forEach(i-> System.out.println(Utils.listWithCommaSeparator(i)));
     }
+
+    @Test
+    public void testComputePermutationsWithoutDupsIteratively(){
+        testComputePermutationsWithoutDups(RecursionAndDynamicProgramming::computeAllPermutationsIteratively);
+    }
+
+    @Test
+    public void testComputePermutationsWithoutDupsRecursively(){
+        testComputePermutationsWithoutDups(RecursionAndDynamicProgramming::computeAllPermutationsRecursively);
+    }
+
+    private void testComputePermutationsWithoutDups(Function<String, List<String>> func){
+        List<String> list = func.apply("ab");
+        System.out.println(Utils.listWithCommaSeparator(list));
+        list = func.apply("abc");
+        System.out.println(Utils.listWithCommaSeparator(list));
+        list = func.apply("abcdef");
+        Assert.assertEquals(6*5*4*3*2, list.size());
+        System.out.println(Utils.listWithCommaSeparator(list));
+    }
+
+    @Test
+    public void testComputePermutationsWithDups(){
+        List<String> list = RecursionAndDynamicProgramming.getPermsWithDups("ab");
+        System.out.println(Utils.listWithCommaSeparator(list));
+        list = RecursionAndDynamicProgramming.getPermsWithDups("aa");
+        System.out.println(Utils.listWithCommaSeparator(list));
+        list = RecursionAndDynamicProgramming.getPermsWithDups("aabb");
+        System.out.println(Utils.listWithCommaSeparator(list));
+
+        list = RecursionAndDynamicProgramming.getPermsWithDups("abc");
+        System.out.println(Utils.listWithCommaSeparator(list));
+        list = RecursionAndDynamicProgramming.getPermsWithDups("aabbbcccc");
+        Assert.assertEquals(MathAlgorithms.calcNchooseK(9,2) * MathAlgorithms.calcNchooseK(9-2,3), list.size());
+        System.out.println(list.size());
+        System.out.println(Utils.listWithCommaSeparator(list));
+    }
+
 }

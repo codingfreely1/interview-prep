@@ -384,4 +384,92 @@ public class RecursionAndDynamicProgramming {
         }
         return allSubsets;
     }
+
+    /**
+     *
+     * @param str
+     * @return
+     */
+    public static List<String> computeAllPermutationsIteratively(String str){
+        List<String> permutations = new ArrayList<>();
+
+        if(str.isEmpty()){
+            return permutations;
+        }
+
+        permutations.add("");
+
+        for(int i = 0; i < str.length(); i ++ ){
+            char curChar = str.charAt(i);
+            permutations = getPermutationsWithChar (permutations, curChar);
+        }
+
+        return permutations;
+    }
+
+    private static List<String> getPermutationsWithChar(List<String> list, char c) {
+        List<String> newPermutations = new ArrayList<>();
+        int numPermutations = list.size();
+        for(int j = 0 ; j < numPermutations; j ++) {
+            String cur = list.get(j);
+            StringBuilder sb = new StringBuilder();
+            int len = cur.length();
+            for(int i = -1 ;  i< len; i ++) { //running len + 1 times
+                String sub1 = cur.substring(0,i+1);
+                String sub2 = cur.substring(i+1, len);
+                sb.append(sub1).append(c).append(sub2);
+                newPermutations.add(sb.toString());
+                sb.setLength(0); //resetting.
+            }
+        }
+        return newPermutations;
+    }
+
+    public static List<String> computeAllPermutationsRecursively(String str){
+        List<String> permutations = new ArrayList<>();
+        permutations.add("");
+        return computeAllPermutationsHelper(str, 0, permutations);
+    }
+
+    private static List<String> computeAllPermutationsHelper(String str, int curIndex, List<String> permutations){
+        if(curIndex == str.length()){
+            return permutations;
+        }
+
+        char curChar = str.charAt(curIndex);
+        permutations = getPermutationsWithChar(permutations, curChar);
+        return computeAllPermutationsHelper (str, curIndex + 1, permutations);
+    }
+
+    public static List<String> getPermsWithDups(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i <  s.length(); i++) {
+            char cur = s.charAt(i);
+            if (map.get(cur) == null ) {
+                map.put(cur, 1);
+            } else {
+                map.put(cur, map.get(cur) +1);
+            }
+        }
+        List<String> result = new ArrayList<>();
+        getPermsWithDups(map, s.length(), "", result);
+        return result;
+    }
+
+    private static void getPermsWithDups(Map<Character, Integer> map, int length, String prefix, List<String> result)  {
+        if(prefix.length() == length){
+            result.add(prefix);
+            return;
+        }
+
+        Set<Character> chars = map.keySet();
+        for(Character c: chars) {
+            int count = map.get(c);
+            if(count > 0) {
+                map.put(c, count -1);
+                getPermsWithDups(map, length, prefix + String.valueOf(c), result);
+                map.put(c, count);
+            }
+        }
+    }
 }
