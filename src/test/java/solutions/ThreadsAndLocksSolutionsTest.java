@@ -1,6 +1,8 @@
 package solutions;
 
 import org.junit.Test;
+import solutions.threadtest.FooGood;
+import solutions.threadtest.FooNoGood;
 import solutions.threadtest.TestThread;
 import solutions.threadtest.SomeClass;
 
@@ -85,6 +87,53 @@ public class ThreadsAndLocksSolutionsTest {
         //suspending process termination so I can see the printouts.
         try {
             Thread.sleep(waitTime);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * A no good solution for q 15.15 - One thread was suppose to call first() , second thread was suppose to call second() but only after
+     * previous finished executing first but unlocking failed.
+     */
+    @Test
+    public void testUnlockingLockFromDifferentThreads(){
+            FooNoGood foo = new FooNoGood();
+
+            Thread[] threads = { new Thread(new TestThread(foo::first)),
+                    new Thread(new TestThread(foo::second)),
+                    new Thread(new TestThread(foo::third))};
+
+            for(Thread t: threads){
+                t.start();
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        System.out.println("second and third weren't called since the unlocking of second failed.");
+    }
+
+    /**
+     * A working solution for q 15.15 - using semaphores. the main thread is lockign second and third. and first thread is releasing second and second thread
+     * is releasing third.
+     */
+    @Test
+    public void testUnlockingLockUsingSemaphores(){
+        FooGood foo = new FooGood();
+
+        Thread[] threads = { new Thread(new TestThread(foo::first)),
+                new Thread(new TestThread(foo::second)),
+                new Thread(new TestThread(foo::third))};
+
+        for(Thread t: threads){
+            t.start();
+        }
+
+        try {
+            Thread.sleep(1600);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
