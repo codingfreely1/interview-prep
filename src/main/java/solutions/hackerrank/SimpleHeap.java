@@ -6,6 +6,8 @@ import java.util.*;
 /**
  * Created by yael on 17/01/17.
  * Solved hackerrank heap challenge. https://www.hackerrank.com/challenges/qheap1
+ * This implementation of the heap is different than the previous one I've implemented because it supports removal
+ * of elements from the entire heap, not just the root.
  */
 public class SimpleHeap {
 
