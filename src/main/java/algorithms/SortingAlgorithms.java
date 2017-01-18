@@ -206,12 +206,7 @@ public class SortingAlgorithms {
         Map<Integer, List<Integer>> buckets = new HashMap<>();
 
         insertIntoBuckets(list, buckets, rangePerBucket, min);
-
-        printBuckets("before sorting", buckets, numBuckets);
-        sortBuckets(buckets,numBuckets);
-        printBuckets("after sorting", buckets, numBuckets);
-
-        collectBackToList(buckets, numBuckets, list);
+        sortAndCollect(buckets, numBuckets, list);
     }
 
     private static void printBuckets(String header, Map<Integer, List<Integer>> buckets, int numBuckets) {
@@ -231,22 +226,16 @@ public class SortingAlgorithms {
         }
     }
 
-    private static void sortBuckets(Map<Integer, List<Integer>> buckets, int numBuckets){
-        for(int i = 0 ; i< numBuckets; i++) {
-            List<Integer> list = buckets.get(i);
-            if(list != null){
-                insertionSort(list);
-            }
-        }
-    }
-
-    private static void collectBackToList(Map<Integer, List<Integer>> buckets, int numBuckets, List<Integer> list){
+    private static void sortAndCollect(Map<Integer, List<Integer>> buckets, int numBuckets, List<Integer> list){
         list.clear();
+        printBuckets("before sorting", buckets, numBuckets);
         for(int i = 0 ; i< numBuckets; i++) {
             List<Integer> listInBucket = buckets.get(i);
             if(listInBucket != null){
+                insertionSort(list);
                 list.addAll(listInBucket);
             }
         }
+        printBuckets("after sorting", buckets, numBuckets);
     }
 }
