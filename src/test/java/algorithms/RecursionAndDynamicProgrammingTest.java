@@ -19,6 +19,33 @@ import static algorithms.RecursionAndDynamicProgramming.*;
 public class RecursionAndDynamicProgrammingTest {
 
     @Test
+    public void testFibonacci(){
+        testFibonacci(RecursionAndDynamicProgramming::fibonacci);
+    }
+
+    @Test
+    public void testFibonacciDynamic(){
+        testFibonacci(RecursionAndDynamicProgramming::fibonacciDynamic);
+    }
+
+    @Test
+    public void testFibonacciIterative(){
+        testFibonacci(RecursionAndDynamicProgramming::fibonacciIterative);
+    }
+
+    private void testFibonacci(Function<Integer, Integer> function){
+        Assert.assertEquals(0,function.apply(0).intValue());
+        Assert.assertEquals(1,function.apply(1).intValue());
+        Assert.assertEquals(1,function.apply(2).intValue());
+        Assert.assertEquals(2,function.apply(3).intValue());
+        Assert.assertEquals(3,function.apply(4).intValue());
+        Assert.assertEquals(5,function.apply(5).intValue());
+        Assert.assertEquals(8,function.apply(6).intValue());
+        Assert.assertEquals(13,function.apply(7).intValue());
+        Assert.assertEquals(21,function.apply(8).intValue());
+    }
+
+    @Test
     public void testTowersOfHanoiMoveIfLegal(){
 
         Stack<Integer> source = new Stack<>();

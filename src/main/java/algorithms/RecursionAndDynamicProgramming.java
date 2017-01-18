@@ -10,6 +10,54 @@ import java.util.*;
  */
 public class RecursionAndDynamicProgramming {
 
+    public static int fibonacci(int n) {
+        if(n == 0){
+            return 0;
+        }
+        if(n == 1){
+            return 1;
+        }
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+
+    private static List<Integer> cache = new ArrayList<>();
+    static {
+        cache.add(0);
+        cache.add(1);
+    }
+
+    public static int fibonacciDynamic(int n) {
+        if(n < cache.size()){
+            return cache.get(n);
+        }
+        int res =  fibonacciDynamic(n-1) + fibonacciDynamic(n-2);
+        cache.add(res);
+        return res;
+    }
+
+    public static int fibonacciIterative(int n) {
+
+        if(n == 0){
+            return 0;
+        }
+        if(n == 1){
+            return 1;
+        }
+
+        int nMinus2 = 0;
+        int nMinus1 = 1;
+        int fibonacci_n = 0;
+
+        for(int i = 2; i<=n ; i++) {
+            fibonacci_n = nMinus1 + nMinus2;
+            nMinus2 = nMinus1;
+            nMinus1 = fibonacci_n;
+        }
+
+        return fibonacci_n;
+    }
+
+
     public static <T extends Comparable<T>> void towersOfHanoi(Stack<T> source, Stack<T> middle, Stack<T> dest){
 
         moveIfLegal(source, middle);
