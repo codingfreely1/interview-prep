@@ -1,6 +1,9 @@
 package algorithms;
 
+import util.Utils;
+
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Created by yael on 31/12/16.
@@ -181,6 +184,69 @@ public class SortingAlgorithms {
                 arr[k] = arr[--k];//Important : first subtract then use k.
             }
             arr[k] = curVal;
+        }
+    }
+
+    public static void insertionSort(List<Integer> arr) {
+        for (int i = 1 ; i< arr.size(); i++){
+            int curVal = arr.get(i);
+            int k = i;
+            while( (k > 0)  && ( arr.get(k-1) > curVal) ) {
+                arr.set(k, arr.get(--k));//Important : first subtract then use k.
+            }
+            arr.set(k, curVal);
+        }
+    }
+
+    public static void bucketSort(List<Integer> list){
+        final int numBuckets = 5;
+        int max = list.stream().max(Integer::compareTo).orElse(list.size());
+        int min = list.stream().min(Integer::compareTo).orElse(0);
+        int rangePerBucket = ((max - min) / numBuckets) + 1;
+        Map<Integer, List<Integer>> buckets = new HashMap<>();
+
+        insertIntoBuckets(list, buckets, rangePerBucket, min);
+
+        printBuckets("before sorting", buckets, numBuckets);
+        sortBuckets(buckets,numBuckets);
+        printBuckets("after sorting", buckets, numBuckets);
+
+        collectBackToList(buckets, numBuckets, list);
+    }
+
+    private static void printBuckets(String header, Map<Integer, List<Integer>> buckets, int numBuckets) {
+        System.out.println(header);
+        IntStream.range(0,numBuckets).forEach(i -> {if(buckets.get(i) != null) {
+            System.out.println("bucket #" + i + ": " +Utils.listWithCommaSeparator(buckets.get(i)));
+        }});
+    }
+
+    private static void insertIntoBuckets(List<Integer> arr, Map<Integer, List<Integer>> buckets, int range, int min){
+        for(int i = 0 ; i< arr.size() ; i++) {
+            int bucketKey = (arr.get(i) - min) / range;
+            if(buckets.get(bucketKey) == null){
+                buckets.put(bucketKey, new ArrayList<>());
+            }
+            buckets.get(bucketKey).add(arr.get(i));
+        }
+    }
+
+    private static void sortBuckets(Map<Integer, List<Integer>> buckets, int numBuckets){
+        for(int i = 0 ; i< numBuckets; i++) {
+            List<Integer> list = buckets.get(i);
+            if(list != null){
+                insertionSort(list);
+            }
+        }
+    }
+
+    private static void collectBackToList(Map<Integer, List<Integer>> buckets, int numBuckets, List<Integer> list){
+        list.clear();
+        for(int i = 0 ; i< numBuckets; i++) {
+            List<Integer> listInBucket = buckets.get(i);
+            if(listInBucket != null){
+                list.addAll(listInBucket);
+            }
         }
     }
 }

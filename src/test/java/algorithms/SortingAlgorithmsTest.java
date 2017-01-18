@@ -159,4 +159,11 @@ public class SortingAlgorithmsTest {
         SortingAlgorithms.insertionSort(arr);
         IntStream.range(0,10).forEach(i -> Assert.assertTrue(arr[i] == i+1));
     }
+
+    @Test
+    public void testBucketSort(){
+        List<Integer> array = new ArrayList<>(Arrays.asList(1000, 312, 52, 10, 1));
+        SortingAlgorithms.bucketSort(array);
+        Assert.assertEquals(Arrays.asList(1,10,52,312,1000), array);
+    }
 }
