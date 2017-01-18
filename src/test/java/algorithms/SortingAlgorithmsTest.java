@@ -1,6 +1,5 @@
 package algorithms;
 
-import algorithms.SortingAlgorithms;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -154,4 +153,10 @@ public class SortingAlgorithmsTest {
         IntStream.range(0,10).forEach(i -> Assert.assertTrue(arr[i] == i+1));
     }
 
+    @Test
+    public void testInsertionSort(){
+        int[] arr = {10,9,8,7,6,5,4,3,2,1};
+        SortingAlgorithms.insertionSort(arr);
+        IntStream.range(0,10).forEach(i -> Assert.assertTrue(arr[i] == i+1));
+    }
 }

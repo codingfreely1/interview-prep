@@ -172,4 +172,15 @@ public class SortingAlgorithms {
             arr[inx1] = arr[inx1] - arr[inx2];
         }
     }
+
+    public static void insertionSort(int[] arr) {
+        for (int i = 1 ; i< arr.length; i++){
+            int curVal = arr[i];
+            int k = i;
+            while( (k > 0)  && ( arr[k-1] > curVal) ) {
+                arr[k] = arr[--k];//Important : first subtract then use k.
+            }
+            arr[k] = curVal;
+        }
+    }
 }
