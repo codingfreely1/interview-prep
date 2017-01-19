@@ -520,4 +520,42 @@ public class RecursionAndDynamicProgramming {
             }
         }
     }
+
+    /**
+     * q 16.11 DivingBoard lengths. page 182
+     */
+
+    private static Map<Integer, Set<Integer>> map = new HashMap<>();
+    public static final int shortLen = 5;
+    public static final int longLen = 10;
+
+    public static Set<Integer> calcBoardLengthsRecursive(int k) {
+        if(map.get(k) != null) {
+            return map.get(k);
+        }
+
+        Set<Integer> res = new HashSet<>();
+        if(k == 0){
+            res.add(0);
+            return res;
+        }
+
+        Set<Integer> prevRes = calcBoardLengthsRecursive(k-1);
+
+        for(Integer i : prevRes){
+             res.add(i + shortLen);
+             res.add(i + longLen);
+        }
+        map.put(k, res);
+        return res;
+    }
+
+    public static Set<Integer> calcBoardLengthsSimple(int k) {
+        Set<Integer> res = new HashSet<>();
+        for(int i = 0;  i<=k ; i++) {
+            res.add( (i * shortLen) + (k-i)* longLen);
+        }
+        return res;
+    }
+
 }

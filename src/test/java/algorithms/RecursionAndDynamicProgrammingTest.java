@@ -5,9 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import util.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
@@ -248,4 +246,26 @@ public class RecursionAndDynamicProgrammingTest {
         System.out.println(Utils.listWithCommaSeparator(list));
     }
 
+    @Test
+    public void testCalcLengthRecursive(){
+        testCalcLength(RecursionAndDynamicProgramming::calcBoardLengthsRecursive);
+    }
+
+    @Test
+    public void testCalcLengthSimple(){
+        testCalcLength(RecursionAndDynamicProgramming::calcBoardLengthsSimple);
+    }
+
+    private void testCalcLength(Function<Integer, Set<Integer>> function){
+        Set<Integer> expected = new HashSet<>();
+        expected.add(shortLen);
+        expected.add(longLen);
+        Assert.assertEquals(expected, function.apply(1));
+
+        expected = new HashSet<>();
+        expected.add(shortLen + shortLen);
+        expected.add(shortLen + longLen);
+        expected.add(longLen + longLen);
+        Assert.assertEquals(expected, function.apply(2));
+    }
 }
