@@ -154,6 +154,16 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
+    public void testQuickSortBook(){
+        int[] arr = {5,5,3,5,5,4,3,1,5,1};
+        //after the first partition - 5 is the pivot and it appears on both sides but it sort itself.
+        SortingAlgorithms.quickSortBook(arr,0,9);
+        int[] expected = {1,1,3,3,4,5,5,5,5,5};
+
+        IntStream.range(0,10).forEach(i -> Assert.assertTrue(arr[i] == expected[i]));
+    }
+
+    @Test
     public void testInsertionSort(){
         int[] arr = {10,9,8,7,6,5,4,3,2,1};
         SortingAlgorithms.insertionSort(arr);

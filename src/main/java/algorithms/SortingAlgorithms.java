@@ -238,4 +238,46 @@ public class SortingAlgorithms {
         }
         printBuckets("after sorting", buckets, numBuckets);
     }
+
+    public static void quickSortBook(int[] arr, int left, int right) {
+        int index = partitionBook(arr, left, right);
+        if(left < index-1) {
+            quickSortBook(arr, left,index -1);
+        }
+        if(index < right) {
+            quickSortBook(arr, index, right);
+        }
+    }
+
+    private static int partitionBook(int[] arr, int left, int right) {
+        int start = left;
+        int end = right;
+        int pivot = arr[(left+right)/2];
+
+        System.out.println("left: " + left + " right: " + right);
+        IntStream.rangeClosed(left,right).forEach(i -> System.out.print((arr[i] +",")));
+        System.out.println("\npivot " + pivot);
+
+        while(left <= right){
+           while(arr[left] < pivot){
+               left++;
+           }
+           while(arr[right] > pivot){
+               right--;
+           }
+
+           if(left<=right){
+               swap(arr, left, right);
+               left++;
+               right--;
+           }
+       }
+        System.out.println("returning " + left);
+        IntStream.rangeClosed(start,end).forEach(i -> System.out.print((arr[i] +",")));
+        System.out.println();
+        IntStream.range(0,10).forEach(i -> System.out.print((arr[i] +",")));
+        System.out.print("\n\n");
+
+        return left;
+    }
 }
