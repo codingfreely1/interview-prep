@@ -4,6 +4,8 @@ import model.Pair;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * Created by yael on 11/01/17.
  */
@@ -71,5 +73,18 @@ public class InterviewQuestionsSolutionsTest {
         pair = InterviewQuestionsSolutions.findPairMatchSumInUnsortedArray(arr, 32);
         Pair<Integer, Integer> expected = new Pair<>(2,4);
         Assert.assertEquals(expected,pair);
+    }
+
+    @Test
+    public void testIsAllFile(){
+        Assert.assertFalse(InterviewQuestionsSolutions.isAllFile(Arrays.asList(new InterviewQuestionsSolutions.Interval(3,6),
+                new InterviewQuestionsSolutions.Interval(0,0),
+                new InterviewQuestionsSolutions.Interval(2,4),
+                new InterviewQuestionsSolutions.Interval(6,7)), 8));
+
+        Assert.assertTrue(InterviewQuestionsSolutions.isAllFile(Arrays.asList(new InterviewQuestionsSolutions.Interval(3,6),
+                new InterviewQuestionsSolutions.Interval(0,1),
+                new InterviewQuestionsSolutions.Interval(2,4),
+                new InterviewQuestionsSolutions.Interval(6,7)), 8));
     }
 }

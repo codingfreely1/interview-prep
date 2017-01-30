@@ -2,7 +2,10 @@ package solutions;
 
 import org.junit.Assert;
 import model.Pair;
+
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -129,5 +132,39 @@ public class InterviewQuestionsSolutions {
         }
         return null;
     }
+
+    //workshop
+    public static class Interval implements Comparable<Interval>{
+        int start;
+        int end;
+        Interval(int start, int end){
+            this.start = start;
+            this. end= end;
+        }
+
+        @Override
+        public int compareTo(Interval other){
+            return this.start - other.start;
+        }
+    }
+
+    public static boolean isAllFile(List<Interval> intervalArray, int fileSize) {
+        Collections.sort(intervalArray);
+        Integer min = null;
+        Integer max = null;
+        for(Interval i: intervalArray){
+            if(min == null){
+                if( i.start != 0){
+                    return false;
+                }
+                min = i.start;
+                max = i.end;
+            } else if(i.start >= min && i.start <= max+1) {
+                max = (i.end > max) ? i.end : max;
+            }
+        }
+        return max != null && max == (fileSize-1);
+    }
+
 
 }
