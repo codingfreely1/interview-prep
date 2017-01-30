@@ -34,4 +34,17 @@ public class MathAlgorithmsTest {
     public void testNChooseK(){
         Assert.assertEquals(6*5/2, MathAlgorithms.calcNchooseK(6, 2));
     }
+
+    @Test
+    public void testIsPowerOfTwo(){
+        Assert.assertTrue(MathAlgorithms.isPowerOfTwoBitOperation(1));
+        Assert.assertTrue(MathAlgorithms.isPowerOfTwoBitOperation(2));
+        Assert.assertTrue(MathAlgorithms.isPowerOfTwoBitOperation(4));
+        Assert.assertTrue(MathAlgorithms.isPowerOfTwoBitOperation(8));
+
+        Assert.assertFalse(MathAlgorithms.isPowerOfTwoBitOperation(0));
+        Assert.assertFalse(MathAlgorithms.isPowerOfTwoBitOperation(3));
+        Assert.assertFalse(MathAlgorithms.isPowerOfTwoBitOperation(5));
+        Assert.assertFalse(MathAlgorithms.isPowerOfTwoBitOperation(6));
+    }
 }

@@ -50,4 +50,22 @@ public class MathAlgorithms {
 
         return factorial.get(n);
     }
+
+    public static boolean isPowerOfTwo(int num){
+        if(num == 1) return true;
+        int cur = num;
+        while(cur % 2 == 0) {
+            cur = cur / 2;
+            if(cur == 1) {
+                return true;
+            } else if(cur == 0){
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isPowerOfTwoBitOperation(int num){
+        return (num > 0) && ((num & (num -1)) == 0);
+    }
 }
