@@ -60,4 +60,13 @@ public class LinkedListSolutionsTest {
         }
         return next;
     }
+
+    @Test
+    public void testReverseList(){
+        Node<Integer> linkedList = getTestList(Arrays.asList(1,1,1,3));
+        Node<Integer> reverseLinkedList = LinkedListSolutions.reverseLinkedList(linkedList);
+        Node<Integer> backToOrig = LinkedListSolutions.reverseLinkedList(reverseLinkedList);
+
+        Assert.assertTrue(LinkedListSolutions.areListsEqual(linkedList, backToOrig));
+    }
 }

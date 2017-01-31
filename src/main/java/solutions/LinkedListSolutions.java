@@ -69,4 +69,38 @@ public class LinkedListSolutions {
 
     }
     // question 2.1 page 94 - end
+
+    public static <T> Node<T> reverseLinkedList(Node head){
+        if(head == null){
+            return head;
+        }
+        Node<T> prev = null;
+        Node<T> cur = head;
+        Node<T> next = cur.getNext();
+
+        while(next != null){
+            cur.setNext(prev);
+
+            prev = cur;
+            cur = next;
+            next = next.getNext();
+        }
+        cur.setNext(prev);
+        return cur;
+    }
+
+    public static <T> boolean areListsEqual(Node<T> list1, Node<T> list2) {
+        Node<T> cur1 = list1;
+        Node<T> cur2 = list2;
+
+        while(cur1 != null && cur2 != null ){
+            if(!(cur1.getData().equals(cur2.getData()))){
+                return false;
+            }
+            cur1 = cur1.getNext();
+            cur2 = cur2.getNext();
+        }
+        return cur1 == cur2;
+    }
+
 }
