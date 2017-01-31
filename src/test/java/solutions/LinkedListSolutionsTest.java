@@ -45,14 +45,14 @@ public class LinkedListSolutionsTest {
         printList(linkedList);
     }
 
-    private <T> void printList(Node<T> node) {
+    private <T extends Comparable<T>> void printList(Node<T> node) {
         while (node != null) {
             System.out.println(node.getData());
             node = node.getNext();
         }
     }
 
-    private <T> Node<T> getTestList(List<T> collection) {
+    private <T extends Comparable<T>> Node<T> getTestList(List<T> collection) {
         Node<T> next  = null;
 
         for (int i = collection.size() -1; i >= 0 ; i--) {
@@ -68,5 +68,16 @@ public class LinkedListSolutionsTest {
         Node<Integer> backToOrig = LinkedListSolutions.reverseLinkedList(reverseLinkedList);
 
         Assert.assertTrue(LinkedListSolutions.areListsEqual(linkedList, backToOrig));
+    }
+
+    @Test
+    public void testMergeTwoLists(){
+        Node<Integer> list1 = getTestList(Arrays.asList(1,5,5,7));
+        Node<Integer> list2 = getTestList(Arrays.asList(3,5,6,8));
+
+        Node<Integer> merged = LinkedListSolutions.mergeTwoLists(list1, list2);
+        Node<Integer> expected = getTestList(Arrays.asList(1,3,5,5,5,6,7,8));
+
+        Assert.assertTrue(LinkedListSolutions.areListsEqual(merged, expected));
     }
 }

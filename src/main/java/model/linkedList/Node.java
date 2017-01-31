@@ -3,7 +3,7 @@ package model.linkedList;
 /**
  * Created by yael on 03/01/17.
  */
-public class Node<T> {
+public class Node<T extends Comparable<T>> {
     private T data;
     private Node<T> next;
 

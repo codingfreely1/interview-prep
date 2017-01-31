@@ -26,7 +26,7 @@ public class LinkedListSolutions {
      * @param list
      * @param <T>
      */
-    public static <T> void removeDuplicatesFromUnsortedList(Node<T> list) {
+    public static <T extends Comparable<T>> void removeDuplicatesFromUnsortedList(Node<T> list) {
         Set<T> set = new HashSet<>();
 
         Node<T> curNode = list;
@@ -49,7 +49,7 @@ public class LinkedListSolutions {
      * @param list
      * @param <T>
      */
-    public static <T> void removeDuplicatesFromUnsortedListNoSpace(Node<T> list) {
+    public static <T extends Comparable<T>> void removeDuplicatesFromUnsortedListNoSpace(Node<T> list) {
         Node<T> cur = list;
         Node<T> runner;
 
@@ -70,7 +70,7 @@ public class LinkedListSolutions {
     }
     // question 2.1 page 94 - end
 
-    public static <T> Node<T> reverseLinkedList(Node head){
+    public static <T extends Comparable<T>> Node<T> reverseLinkedList(Node head){
         if(head == null){
             return head;
         }
@@ -89,7 +89,7 @@ public class LinkedListSolutions {
         return cur;
     }
 
-    public static <T> boolean areListsEqual(Node<T> list1, Node<T> list2) {
+    public static <T extends Comparable<T>> boolean areListsEqual(Node<T> list1, Node<T> list2) {
         Node<T> cur1 = list1;
         Node<T> cur2 = list2;
 
@@ -103,4 +103,46 @@ public class LinkedListSolutions {
         return cur1 == cur2;
     }
 
+    public static <T extends Comparable<T>> Node<T> mergeTwoLists(Node<T> list1, Node<T> list2){
+            if(list1 == null) {
+                return list2;
+            } else if(list2 == null){
+                return list1;
+            }
+
+            Node<T> a = list1;
+            Node<T> b = list2;
+            Node<T> newHead = null;
+            Node<T> newTail = null;
+            while(a != null && b!= null){
+                if(a.getData().compareTo(b.getData()) < 0) {
+                    if(newHead == null){
+                        newHead = a;
+                        newTail = a;
+                    } else {
+                        newTail.setNext(a);
+                        newTail = newTail.getNext();
+                    }
+                    a = a.getNext();
+                } else {
+                    if(newHead == null){
+                        newHead = b;
+                        newTail = b;
+                    } else {
+                        newTail.setNext(b);
+                        newTail = newTail.getNext();
+                    }
+                    b = b.getNext();
+                }
+            }
+
+            if(a != null){
+                newTail.setNext(a);
+            }
+
+            if(b != null) {
+                newTail.setNext(b);
+            }
+            return newHead;
+    }
 }
