@@ -106,10 +106,8 @@ public class ArraysAndStrings {
                     chars.remove(s.charAt(i) );
                 }
                 start = lastInx+1;
-                end = Math.max(start, end)+1; // abcc
-            } else {
-                end++;
             }
+            end++;
             if((end - start) > maxLen ) {
                 maxLen = end - start;
             }
