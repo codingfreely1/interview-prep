@@ -32,4 +32,12 @@ public class ArraysAndStringsTest {
         Assert.assertFalse(ArraysAndStrings.isUniqueBookSolution("abcdefghijklmnopaz"));
     }
 
+    @Test
+    public void testLongestSubStringNoDups(){
+        Assert.assertEquals(1,ArraysAndStrings.findLongestSubStringNoDups("aaaa"));
+        Assert.assertEquals(5,ArraysAndStrings.findLongestSubStringNoDups("aaabcdea"));
+        Assert.assertEquals(6,ArraysAndStrings.findLongestSubStringNoDups("abcadbef"));
+        Assert.assertEquals(3,ArraysAndStrings.findLongestSubStringNoDups("abac"));
+    }
+
 }

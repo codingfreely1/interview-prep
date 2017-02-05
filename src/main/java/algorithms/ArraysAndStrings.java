@@ -2,7 +2,7 @@ package algorithms;
 
 import jdk.nashorn.internal.runtime.BitVector;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by yael on 31/12/16.
@@ -88,6 +88,34 @@ public class ArraysAndStrings {
             checker |= (1 << val);
         }
         return true;
+    }
+
+    public static int findLongestSubStringNoDups(String s) {
+        if(s.isEmpty()){
+            return 0;
+        }
+        Map<Character,Integer> chars = new HashMap<>();
+        int start = 0;
+        int end = 0;
+        int maxLen = 0;
+        for(int i = 0; i < s.length() ; i++){
+            char curChar = s.charAt(i);
+            Integer lastInx = chars.get(curChar);
+            if(lastInx != null) {
+                for(int j = start; j<= lastInx ; j++){
+                    chars.remove(s.charAt(i) );
+                }
+                start = lastInx+1;
+                end = Math.max(start, end)+1; // abcc
+            } else {
+                end++;
+            }
+            if((end - start) > maxLen ) {
+                maxLen = end - start;
+            }
+            chars.put(curChar, i);
+        }
+        return maxLen;
     }
 
 }
