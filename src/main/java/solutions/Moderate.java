@@ -1,5 +1,9 @@
 package solutions;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
 /**
  * Created by yael on 19/01/17.
  */
@@ -155,6 +159,95 @@ public class Moderate {
         }
 
         return Integer.valueOf(equation);
+    }
+
+    private static Map<Character,Integer> opPriorityMap = new HashMap<>();
+    static {
+        opPriorityMap.put('*', 1);
+        opPriorityMap.put('/', 1);
+        opPriorityMap.put('+', 0);
+        opPriorityMap.put('-', 0);
+    }
+
+    private static class EquationParser {
+        int curIndex = -1;
+        String s;
+
+        public EquationParser(String s) {
+            this.s = s;
+        }
+
+        double getNextVal() {
+            StringBuilder sb = new StringBuilder();
+            curIndex++;
+            while (curIndex == 0 || (hasNext() && !opPriorityMap.keySet().contains(s.charAt(curIndex)))) {
+                sb.append(s.charAt(curIndex));
+                curIndex++;
+            }
+            return Double.valueOf(sb.toString());
+         }
+        char getNextOperator() {
+            //curIndex++;
+            return s.charAt(curIndex);
+        }
+
+        boolean hasNext(){
+            return curIndex < s.length();
+        }
+    }
+
+
+    public static Double calculate(String eq) {
+        Stack<Double> values = new Stack<>();
+        Stack<Character> operators = new Stack<>();
+        EquationParser parser = new EquationParser(eq);
+        if(parser.hasNext()){
+            values.push(parser.getNextVal());
+        } else {
+            return null;
+        }
+
+        while(parser.hasNext()) {
+            char op = parser.getNextOperator();
+            double secondVal = parser.getNextVal();
+
+            if(opPriorityMap.get(op) == 1 ){
+                //do operation and push res to operand stack
+                double firstVal = values.pop();
+                values.push(doAction(op, firstVal, secondVal));
+            }
+            else if(opPriorityMap.get(op) == 0){
+                //wait with operation do operation and push res to operand stack
+                operators.push(op);
+                values.push(secondVal);
+            }
+        }
+
+        while(!operators.isEmpty()){
+            double firstVal = values.pop();
+            double secVal = values.pop();
+            char op = operators.pop();
+            values.push(doAction(op, firstVal, secVal));
+        }
+
+        return values.pop();
+    }
+
+
+    private static Double doAction(char op, double firstVal, double secondVal){
+        if(op == '+'){
+            return firstVal+secondVal;
+        }
+        if(op == '*'){
+            return firstVal*secondVal;
+        }
+        if(op == '-'){
+            return secondVal-firstVal;
+        }
+        if(op == '/'){
+            return firstVal/secondVal;
+        }
+        return null;
     }
 
 }

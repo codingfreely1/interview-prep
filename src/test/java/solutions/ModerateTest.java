@@ -35,4 +35,22 @@ public class ModerateTest {
         Assert.assertEquals(10, Moderate.compute(eq));
     }
 
+    @Test
+    public void testCalculate(){
+        String eq = "1+3";
+        Assert.assertEquals(4, Moderate.calculate(eq).intValue());
+        eq = "1+3*5-6";
+        Assert.assertEquals(10, Moderate.calculate(eq).intValue());
+        eq = "1+3*5-6/2";
+        Assert.assertEquals(13, Moderate.calculate(eq).intValue());
+        eq = "1+3.0*5-6/2";
+        Assert.assertEquals(13, Moderate.calculate(eq).intValue());
+        eq = "1";
+        Assert.assertEquals(1, Moderate.calculate(eq).intValue());
+        eq = "5-3";
+        Assert.assertEquals(2, Moderate.calculate(eq).intValue());
+        eq = "-1-1";
+        Assert.assertEquals(-2, Moderate.calculate(eq).intValue());
+    }
+
 }
