@@ -29,6 +29,9 @@ public class ArraysSolutionsTest {
         int[] arr3 = {1, 1, -1};
         Assert.assertFalse(ArraysSolutions.isCircularArray(arr3));
 
+        int[] arr4 = {-1, -1, -1};
+        Assert.assertTrue(ArraysSolutions.isCircularArray(arr4));
+
         int[] arr = {1,2,3,2,4,5,10,7};
         Assert.assertFalse(ArraysSolutions.isCircularArray(arr));
     }

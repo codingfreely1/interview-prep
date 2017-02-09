@@ -37,8 +37,11 @@ public class ArraysSolutions {
         int curInx = 0;
         int n = arr.length;
         while(stepsCount < n) {
-            curInx = (curInx + arr[curInx])%n;
+            curInx = (curInx + arr[curInx])%n; //-1%3 will return -1 ! out of bounds.
             stepsCount++;
+            if(curInx < 0){
+                curInx += n;
+            }
             if(curInx == startInx && stepsCount < n) {
                 return false;// circle is not passing all elements
             }
