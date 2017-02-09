@@ -19,6 +19,17 @@ public class ArraysSolutionsTest {
 
         int[] arr3 = {1, 3, 2, 3, 4, 8, 7, 9};
         Assert.assertEquals(new Range(2, 5), ArraysSolutions.findLongestIncreasingRange(arr3));
+    }
 
+    @Test
+    public void testIsCircularArray(){
+        int[] arr2 = {2,-1,2};
+        Assert.assertTrue(ArraysSolutions.isCircularArray(arr2));
+
+        int[] arr3 = {1, 1, -1};
+        Assert.assertFalse(ArraysSolutions.isCircularArray(arr3));
+
+        int[] arr = {1,2,3,2,4,5,10,7};
+        Assert.assertFalse(ArraysSolutions.isCircularArray(arr));
     }
 }

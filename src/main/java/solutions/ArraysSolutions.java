@@ -31,4 +31,21 @@ public class ArraysSolutions {
         return res;
     }
 
+    public static boolean isCircularArray(int[] arr) {
+        int startInx = 0;
+        int stepsCount = 0;
+        int curInx = 0;
+        int n = arr.length;
+        while(stepsCount < n) {
+            curInx = (curInx + arr[curInx])%n;
+            stepsCount++;
+            if(curInx == startInx && stepsCount < n) {
+                return false;// circle is not passing all elements
+            }
+
+        }
+        return curInx == startInx;
+    }
+
+
 }
