@@ -70,4 +70,76 @@ public class Hard {
         }
         return neighbors;
     }
+
+    public Map<String, List<Integer>> findWordIndexes(String b, String[] words){
+        TrieNode trie = createTrie(words);
+
+        Map<String, List<Integer>> map = new HashMap<>();
+
+        TrieNode cur;
+        for(int i = 0; i < b.length(); i++){
+            cur  = trie;
+            int offset = 0;
+            cur = cur.getNext(b.charAt(i + offset));
+            while(cur != null) {
+                offset++;
+                if(cur.isValidEnd) {
+                    List<Integer> list = map.get(cur.word);
+                    if(list == null) {
+                        list  = new ArrayList<>();
+                        map.put(cur.word, list);
+                    }
+                    list.add(i);
+                }
+                if(i+offset < b.length()) {
+                    cur = cur.getNext(b.charAt(i + offset));
+                } else {
+                   break;
+                }
+
+            }
+        }
+        return map;
+    }
+
+    class TrieNode{
+        String word;
+        Map<Character, TrieNode> children;
+        boolean isValidEnd;
+
+        TrieNode(String word) {
+            this.word = word;
+            this.children = new HashMap<>();
+            this.isValidEnd = false;
+        }
+
+        void addWord(String word){
+            TrieNode cur = this;
+            for(int i = 0; i<word.length(); i++){
+                cur = cur.addChild(word.charAt(i));
+            }
+            cur.isValidEnd = true;
+        }
+
+        private TrieNode addChild(char c) {
+            TrieNode n = children.get(c);
+            if(n == null) {
+                n = new TrieNode(this.word + c);
+                children.put(c,n);
+            }
+            return n;
+        }
+
+        TrieNode getNext(char c) {
+            return children.get(c);
+        }
+    }
+
+    private TrieNode createTrie(String[] words) {
+        TrieNode root = this.new TrieNode("");
+        for(String w : words) {
+            root.addWord(w);
+        }
+        return root;
+    }
 }
