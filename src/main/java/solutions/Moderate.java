@@ -261,7 +261,7 @@ public class Moderate {
                     System.out.println("string : " + value + " pattern : " + pattern + " found a match for a = " + (a.isEmpty() ? "\"\"" : a) + " and b = " + (b.isEmpty() ? "\"\"" : b));
                     return true;
                 }
-                if(isAMatch(b, a, pattern, value)) { //order shouldn't matter - a b two sub strings, any substring that validates the pattern.
+                if(isAMatch(b, a, pattern, value)) { //we can replace because we are looking to validate the pattern for two sub strings. a , b are just name.
                     System.out.println("string : " + value + " pattern : " + pattern + " found a match for a = " + (b.isEmpty() ? "\"\"" : b) + " and b = " + (a.isEmpty() ? "\"\"" : a));
                     return true;
                 }
