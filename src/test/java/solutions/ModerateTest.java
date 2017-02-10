@@ -53,4 +53,34 @@ public class ModerateTest {
         Assert.assertEquals(-2, Moderate.calculate(eq).intValue());
     }
 
+    @Test
+    public void testPatternMaching(){
+        String value = "catcat";
+        String pattern = "aa";
+        Assert.assertTrue(Moderate.patternMatching(pattern, value));
+
+        value = "catcatgo";
+        pattern = "aab";
+        Assert.assertTrue(Moderate.patternMatching(pattern, value));
+
+        value = "catcatgo";
+        pattern = "aabb";
+        Assert.assertFalse(Moderate.patternMatching(pattern, value));
+
+        value = "cd";
+        pattern = "a";
+        Assert.assertTrue(Moderate.patternMatching(pattern, value));
+
+        value = "c";
+        pattern = "ab";
+        Assert.assertTrue(Moderate.patternMatching(pattern, value));//b matches empty string
+
+        value = "c";
+        pattern = "aab";
+        Assert.assertTrue(Moderate.patternMatching(pattern, value));//a matches empty string
+
+        value = "ccc";
+        pattern = "aab";
+        Assert.assertTrue(Moderate.patternMatching(pattern, value));//is this the right behaviour ? can a equal b ?
+    }
 }

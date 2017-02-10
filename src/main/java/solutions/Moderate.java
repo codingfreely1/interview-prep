@@ -250,4 +250,58 @@ public class Moderate {
         return null;
     }
 
+    public static boolean patternMatching(String pattern, String value) {
+        String a;
+        String b;
+        for(int aEnds = 1;  aEnds <= value.length() ; aEnds++) {
+            for(int bStart = aEnds ; bStart <= value.length()  ; bStart++) {
+                a = value.substring(0, aEnds);
+                b = value.substring(bStart, value.length()); //must start with bStart and not aEnds e.g catcatgo - be doesn't start right after a ends.
+                if(isAMatch(a, b, pattern, value)) {
+                    System.out.println("string : " + value + " pattern : " + pattern + " found a match for a = " + (a.isEmpty() ? "\"\"" : a) + " and b = " + (b.isEmpty() ? "\"\"" : b));
+                    return true;
+                }
+                if(isAMatch(b, a, pattern, value)) { //order shouldn't matter - a b two sub strings, any substring that validates the pattern.
+                    System.out.println("string : " + value + " pattern : " + pattern + " found a match for a = " + (b.isEmpty() ? "\"\"" : b) + " and b = " + (a.isEmpty() ? "\"\"" : a));
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean isAMatch(String a, String b, String pattern, String value) {
+        if(a.isEmpty() && b.isEmpty()){
+            return value.isEmpty();
+        }
+
+        int matchSize = 0;
+        for(int i = 0 ; i < pattern.length() ; i++) {
+            char cur = pattern.charAt(i);
+            if(cur == 'a') {
+                if(compareSubString(matchSize, value, a)){
+                    matchSize += a.length();
+                } else {
+                    return false;
+                }
+            } else if(cur == 'b') {
+                if(compareSubString(matchSize, value, b)){
+                    matchSize += b.length();
+                } else {
+                    return false;
+                }
+            } else {
+                //error - handle
+            }
+        }
+        return matchSize == value.length();
+    }
+
+    private static boolean compareSubString(int inx, String value, String subString) {
+        if(inx + subString.length() > value.length()){
+            return false;
+        }
+        return value.substring(inx, inx + subString.length()).equals(subString);
+    }
+
 }
