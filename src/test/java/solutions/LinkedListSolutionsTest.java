@@ -1,12 +1,11 @@
 package solutions;
 
+import model.DoubleLinkedNode;
 import model.linkedList.Node;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by yael on 03/01/17.
@@ -79,5 +78,28 @@ public class LinkedListSolutionsTest {
         Node<Integer> expected = getTestList(Arrays.asList(1,3,5,5,5,6,7,8));
 
         Assert.assertTrue(LinkedListSolutions.areListsEqual(merged, expected));
+    }
+
+    @Test
+    public void testCountComponents() {
+        DoubleLinkedNode<Character> a = new DoubleLinkedNode<>('a', null, null);
+        DoubleLinkedNode<Character> b = new DoubleLinkedNode<>('b', a, null);
+        a.right = b;
+        DoubleLinkedNode<Character> c = new DoubleLinkedNode<>('c', b, null);
+        b.right = c;
+        DoubleLinkedNode<Character> d = new DoubleLinkedNode<>('d', c, null);
+        c.right = d;
+        DoubleLinkedNode<Character> e = new DoubleLinkedNode<>('e', d, null);
+        d.right = e;
+        DoubleLinkedNode<Character> f = new DoubleLinkedNode<>('f', e, null);
+        e.right = f;
+
+        Set<DoubleLinkedNode> nodes = new HashSet<>();
+        nodes.add(a);
+        nodes.add(d);
+        nodes.add(e);
+        nodes.add(f);
+
+        Assert.assertEquals( 2, LinkedListSolutions.countConnectedComponents(nodes));
     }
 }

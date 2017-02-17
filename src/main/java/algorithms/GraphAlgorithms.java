@@ -1,5 +1,6 @@
 package algorithms;
 
+import model.DoubleLinkedNode;
 import model.Node;
 import model.ShortestPathNode;
 

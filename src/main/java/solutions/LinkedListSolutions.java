@@ -1,6 +1,7 @@
 package solutions;
 
 
+import model.DoubleLinkedNode;
 import model.linkedList.Node;
 import java.util.HashSet;
 import java.util.List;
@@ -144,5 +145,42 @@ public class LinkedListSolutions {
                 newTail.setNext(b);
             }
             return newHead;
+    }
+
+    /**
+     * Find number of connected components of give nodes.
+     * Here, node a and node b in the nodes set are in the same component
+     * if there is a path from a and be in the doubled linked list (root) where
+     * all elements in the path are in the set nodes.
+     * E.g  a <-> b <-> c <-> d <-> e <-> f <-> g
+     * nodes (b, e , f, g) nodes part of a doubled linked list
+     * output should be 2 : b in one component and e,f,g are in another.
+     * @param nodes part of doubled linked list
+     * @return
+     */
+    public static int countConnectedComponents(Set<DoubleLinkedNode> nodes) {
+
+        int count = 0;
+        Set<DoubleLinkedNode> visited = new HashSet<>();
+
+        for(DoubleLinkedNode n : nodes) {
+
+            if(!visited.contains(n)) {
+                count++;
+
+                visited.add(n);
+                DoubleLinkedNode cur = n.left;
+                while(cur != null && nodes.contains(cur)) {
+                    visited.add(cur);
+                    cur = cur.left;
+                }
+                cur = n.right;
+                while(cur != null && nodes.contains(cur)) {
+                    visited.add(cur);
+                    cur = cur.right;
+                }
+            }
+        }
+        return count;
     }
 }
