@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by yael on 09/02/17.
  */
-public class Hard {
+public class Chapter17 {
     private static Set<String> visited = new HashSet<>();
 
     public static LinkedList<String> getTransformSteps(String s, String d, Set<String> dict) {

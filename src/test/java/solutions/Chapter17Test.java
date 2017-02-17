@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by yael on 09/02/17.
  */
-public class HardTest {
+public class Chapter17Test {
 
     @Test
     public void testWordTransformer(){
@@ -19,7 +19,7 @@ public class HardTest {
         dict.add("how");
         dict.add("wow");
 
-        List<String> l =  Hard.getTransformSteps("why", "how", dict);
+        List<String> l =  Chapter17.getTransformSteps("why", "how", dict);
         System.out.println(l);
     }
 
@@ -34,13 +34,13 @@ public class HardTest {
         dict.add("lime");
         dict.add("like");
 
-        List<String> l =  Hard.getTransformSteps("damp", "like", dict);
+        List<String> l =  Chapter17.getTransformSteps("damp", "like", dict);
         System.out.println(l);
     }
 
     @Test
     public void testFindWordIndexes(){
-        Hard solution = new Hard();
+        Chapter17 solution = new Chapter17();
         String[] words = {"i","is"};
         Map<String, List<Integer>> res = solution.findWordIndexes("mississippi", words);
         Map<String, List<Integer>> expected = new HashMap<>();
