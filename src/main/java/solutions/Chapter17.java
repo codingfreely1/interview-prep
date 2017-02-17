@@ -142,4 +142,117 @@ public class Chapter17 {
         }
         return root;
     }
+
+    //// q 17.18
+    public static Range findSmalestSubArray(int[] bigArray, int[] smallArray) {
+        List<List<Integer>> indexesPerItemInSmall = findIndexes(bigArray, smallArray);
+
+        return findRange(indexesPerItemInSmall);
+    }
+
+    private static List<List<Integer>> findIndexes(int[] bigArray, int[] smallArray) {
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i = 0 ; i< smallArray.length ; i++ ) {
+            List<Integer> list = new ArrayList<>();
+            int value = smallArray[i];
+            for(int j = 0 ; j< bigArray.length ; j++ ) {
+                if(bigArray[j] == value) {
+                    list.add(j);
+                }
+            }
+            res.add(list);
+        }
+        return res;
+    }
+
+    static class HeapNode implements Comparable<HeapNode> {
+        int value;
+        int originListId;
+
+        HeapNode(int value, int originListId) {
+            this.value = value;
+            this.originListId = originListId;
+        }
+
+        @Override
+        public int compareTo(HeapNode heapNode) {
+            return value - heapNode.value;
+        }
+    }
+
+    static class Range {
+        int start;
+        int end;
+
+        Range(int start, int end){
+            this.start = start;
+            this.end = end;
+        }
+        int length(){
+            return end - start +1;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Range range = (Range) o;
+
+            if (start != range.start) return false;
+            return end == range.end;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = start;
+            result = 31 * result + end;
+            return result;
+        }
+    }
+
+    private static Range findRange(List<List<Integer>> indexes) {
+        Range range = null;
+        int maxInx = Integer.MIN_VALUE;
+        PriorityQueue<HeapNode> heap = new PriorityQueue<>();
+
+        //initialize heap with an element from each list.
+        for(int i = 0; i <  indexes.size(); i++ ) {
+            List<Integer> list = indexes.get(i);
+            if(list.isEmpty()){
+                return null; //there is an element in small arr that has no index in big array.
+            }
+            int inx = list.remove(0);
+            heap.add(new HeapNode(inx, i));
+            if(inx > maxInx) {
+                maxInx = inx;
+            }
+        }
+
+
+        while(!heap.isEmpty()) {
+            HeapNode min = heap.remove();
+            int curRangeSize = maxInx - min.value + 1;
+            if(range == null || curRangeSize < range.length() ){
+                range  = new Range(min.value, maxInx);
+            }
+
+            int listId = min.originListId;
+            List<Integer> originList = indexes.get(listId);
+            if(originList.isEmpty()){
+                return range;
+            }
+
+            int nextInx = originList.remove(0);
+            if(nextInx > maxInx) {
+                maxInx = nextInx;
+            }
+            heap.add(new HeapNode(nextInx, listId));
+        }
+
+        return null;
+
+    }
+
+    //// q 17.18
 }

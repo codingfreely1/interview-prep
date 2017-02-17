@@ -49,4 +49,14 @@ public class Chapter17Test {
 
         Assert.assertEquals(expected, res);
     }
+
+    @Test
+    public void testMinRange(){
+        int[] bigArray = {7, 1, 6, 5, 9, 1};
+        int[] smallArray = {1,5, 9};
+        Assert.assertEquals(new Chapter17.Range(3, 5), Chapter17.findSmalestSubArray(bigArray, smallArray));
+
+        int[] bigArray2 = {7,5,9,0,2,1,3,5,7,9,1,1,5,8,8,9,7};
+        Assert.assertEquals(new Chapter17.Range(7, 10), Chapter17.findSmalestSubArray(bigArray2, smallArray));
+    }
 }
