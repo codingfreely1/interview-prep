@@ -254,5 +254,58 @@ public class Chapter17 {
 
     }
 
-    //// q 17.18
+    //// q 17.18 end
+
+    // q 17.8
+    static class Person implements Comparable<Person> {
+        int height;
+        int weight;
+
+        boolean isValid(Person p) {
+            return (this.weight <= p.weight);
+        }
+
+        @Override
+        public int compareTo(Person person) {
+                return this.height - person.height;
+        }
+
+        public Person(int height, int weight) {
+            this.height = height;
+            this.weight = weight;
+        }
+    }
+
+    public static int getMaxPeopleInTower(List<Person> list) {
+        Collections.sort(list);
+        return calcMaxPeople(list, 0, 0,null);
+
+    }
+
+    public static int calcMaxPeople(List<Person> list, int inx, int count, Person last) {
+        if(inx == list.size()) {
+            return count;
+        }
+        List<Integer> indexes = getValidOptions(list, inx, last);
+
+        int max = count;
+        for(Integer i : indexes ) {
+            int res = calcMaxPeople(list, i+1, count+1, list.get(i));
+            if(res > max) {
+                max = res;
+            }
+        }
+        return max;
+    }
+
+    private static List<Integer> getValidOptions(List<Person> list, int inx, Person last) {
+        List<Integer> res = new ArrayList<>();
+        for(int i = inx; i< list.size(); i++){
+            if(last == null || last.isValid(list.get(i))){
+                res.add(i);
+            }
+        }
+        return res;
+    }
+    //
 }

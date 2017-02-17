@@ -59,4 +59,19 @@ public class Chapter17Test {
         int[] bigArray2 = {7,5,9,0,2,1,3,5,7,9,1,1,5,8,8,9,7};
         Assert.assertEquals(new Chapter17.Range(7, 10), Chapter17.findSmalestSubArray(bigArray2, smallArray));
     }
+
+    @Test
+    public void testCircusTower(){
+        List<Chapter17.Person> people = Arrays.asList(new Chapter17.Person(70, 150),
+                new Chapter17.Person(75, 190));
+        Assert.assertEquals(2, Chapter17.getMaxPeopleInTower(people));
+
+        people = Arrays.asList(new Chapter17.Person(65, 100),
+                new Chapter17.Person(70, 150),
+                new Chapter17.Person(56, 90),
+                new Chapter17.Person(75, 190),
+                new Chapter17.Person(60, 95),
+                new Chapter17.Person(68, 110));
+        Assert.assertEquals(6, Chapter17.getMaxPeopleInTower(people));
+    }
 }
