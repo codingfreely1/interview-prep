@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * Created by yael on 19/01/17.
  */
-public class Moderate {
+public class Chapter16 {
 
     /**
      * O(n^2)
