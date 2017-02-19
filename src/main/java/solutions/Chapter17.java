@@ -308,4 +308,63 @@ public class Chapter17 {
         return res;
     }
     //
+
+    private static Pair[][] getPreProcessedMatrix(int[][] matrix) {
+        Pair[][] processed = new Pair[matrix.length][matrix[0].length];
+
+        for(int r = matrix.length-1; r >=0 ; r-- ) {
+            for(int c = matrix[0].length-1; c >=0 ; c-- ) {
+                processed[r][c] = new Pair(0,0);
+                if(matrix[r][c] == 1) {
+                    if(c+1 < matrix[0].length) {
+                        processed[r][c].second  = processed[r][c+1].second +1;
+                    } else {
+                        processed[r][c].second  = 1;
+                    }
+
+                    if(r+1 < matrix.length) {
+                        processed[r][c].first  = processed[r+1][c].first +1;
+                    } else {
+                        processed[r][c].first  = 1;
+                    }
+                }
+            }
+        }
+        return processed;
+    }
+
+
+    public static Integer calcMaxSquare(int[][] matrix) {
+        Pair[][] processed = getPreProcessedMatrix(matrix);
+
+        for(int ss = matrix.length ; ss >= 0 ;  ss--) {
+            for(int r = 0;  r < matrix.length - ss +1 ; r++) {
+                for(int c = 0;  c < matrix[0].length - ss +1 ; c++) {
+                    if(isValidSquare(r, c, ss, processed)){
+                        return ss;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    static class Pair{
+        public int first;
+        public int second;
+
+        public Pair(int first, int second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    private static boolean isValidSquare(int row, int col, int size, Pair[][] matrix) {
+        if( matrix[row][col].first == size && matrix[row][col].second == size &&
+                matrix[row + size-1][col].second == size && matrix[row][col+size-1].first == size ) {
+            return true;
+        }
+        return false;
+    }
+
 }

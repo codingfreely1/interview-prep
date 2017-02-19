@@ -74,4 +74,14 @@ public class Chapter17Test {
                 new Chapter17.Person(68, 110));
         Assert.assertEquals(6, Chapter17.getMaxPeopleInTower(people));
     }
+
+    @Test
+    public void testMaxSquareSize(){
+        int[][] mat = new int[3][3];
+        mat[1][0] = 1;
+        mat[1][1] = 1;
+        mat[2][0] = 1;
+        mat[2][1] = 1;
+        Assert.assertEquals(2,Chapter17.calcMaxSquare(mat).intValue());
+    }
 }
