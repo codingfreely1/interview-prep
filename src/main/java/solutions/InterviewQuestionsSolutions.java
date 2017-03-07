@@ -166,5 +166,126 @@ public class InterviewQuestionsSolutions {
         return max != null && max == (fileSize-1);
     }
 
+/*
+ 000010
+ 110010
+ 010001
+ 000010
+ */
 
+/*
+ * 00010
+ * 11010
+ * 10100
+ * 11100
+ * 00000
+ */
+
+//    public static int getMaxIsland(int[][] matrix) {
+//
+//        visited = new boolean[matrix.length][matrix[0].length];
+//        int max = 0;
+//        for(int i = 0; i < matrix.length ; i++){
+//            for(int j = 0; j < matrix[0].length ; j++){
+//                int cur = countOnes(matrix, i, j);
+//                if(cur > max) {
+//                    max = cur;
+//                }
+//            }
+//        }
+//        return max;
+//    }
+//
+//    private static boolean[][] visited;
+//
+//
+//    private static int countOnes(int[][] matrix, int r, int c){
+//
+//        if(!inBounds(matrix, r, c) || matrix[r][c] == 0 || visited[r][c]) {
+//            return 0;
+//        }
+//
+//        visited[r][c] = true;
+//
+//        return  matrix[r][c] + countOnes(matrix, r-1, c)
+//                + countOnes(matrix, r+1, c)
+//                + countOnes(matrix, r, c-1)
+//                + countOnes(matrix, r, c+1);
+//    }
+//
+//    private static boolean inBounds(int[][] matrix, int row, int col) {
+//        if(row < matrix.length && row >= 0 && col < matrix[0].length && col >= 0 ){
+//            return true;
+//        }
+//        return false;
+//    }
+
+//import java.io.*;
+//import java.util.*;
+
+
+//    class Solution {
+//        private static List<String> getAllUrls(String url) {
+//            Queue<String> queue = new LinkedList<>();
+//            Set<String> visited = new HashSet<>();
+//
+//            queue.add(url);
+//
+//            while(!queue.isEmpty()) {
+//
+//                String cur = queue.remove();
+//                if(!visited.contains(cur)){
+//                    visited.add(cur);
+//                    queue.addAll(getLinks(url));
+//                }
+//
+//            }
+//
+//            return visited;
+//        }
+//
+//        private static List<String> getLinks(String url){
+//
+//        }
+//
+//        private static ExecuterService pool;
+//        private static Queue<String> queue = new LinkedList<>();
+//        private static Set<String> visited = new HashSet<>();
+//        private static int runningTasks = 0;
+//        private static Lock lock = new ReentrantLock();
+//
+//        private static List<String> getAllUrls(String url) {
+//
+//
+//            queue.add(url);
+//
+//            pool = Executer.newFixedThreadPool(MAX_THREADS);
+//
+//            Runnable task = new Runnable(){
+//                @Override
+//                public void run(){
+//                    lock.lock();
+//                    String cur = queue.remove();
+//                    if(!visited.contains(cur)){
+//                        visited.add(cur);
+//                        queue.addAll(getLinks(url));
+//                    }
+//                    runningTasks--;
+//                    lock.release();
+//                }
+//            }
+//
+//
+//            while(!queue.isEmpty() || runningTasks > 0 ) {
+//
+//                if(!queue.isEmpty()){
+//                    runningTasks++;
+//                    pool.submit(task);
+//                }
+//            }
+//
+//            return visited;
+//        }
+//
+//    }
 }
